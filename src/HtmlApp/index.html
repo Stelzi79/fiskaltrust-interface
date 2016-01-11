@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>TypeScript HTML App</title>
+    <link rel="stylesheet" href="app.css" type="text/css" />
+    <script src="app.js"></script>
+
+    <script src="Scripts/jquery-2.2.0.js"></script>
+
+</head>
+<body>
+
+    <h1>HTML App</h1>
+    
+    <div>
+        <label for="serviceurl">Service URL</label>
+        <div>
+            <input type="url" id="serviceurl" name="serviceurl" value="http://localhost:1201/fiskaltrust/POS" />
+        </div>
+    </div>
+
+    <div>
+        <label for="reqdata">Request Daten</label>
+        <div>
+            <textarea id="reqdata" name="reqdata" cols="80" rows="20" readonly="readonly">{"ftCashBoxID":"fiskaltrust-TEST","cbTerminalID":"1","cbReceiptReference":"9c856fa6-5e3c-4e2c-b275-82cf35363fdf","cbReceiptMoment":"\/Date(1452442695134+0100)\/","cbChargeItems": [ {"Quantity":1.0,"Description":"Artikel 1","Amount":4.8,"VATRate":20.0,"ftChargeItemCase":4707387510509010944,"ftChargeItemCaseData":"","AccountNumber":"","CostCenter":"","ProductGroup":"","ProductNumber":"1","ProductBarcode":"","Unit":""}, {"Quantity":1.0,"Description":"Artikel 2","Amount":3.6,"VATRate":20.0,"ftChargeItemCase":4707387510509010944,"ftChargeItemCaseData":"","AccountNumber":"","CostCenter":"","ProductGroup":"","ProductNumber":"2","ProductBarcode":"","Unit":""}], "cbPayItems": [{"Quantity":1.0,"Description":"Bar","Amount":8.4,"ftPayItemCase":4707387510509010944,"ftPayItemCaseData":"","AccountNumber":"","CostCenter":"","MoneyGroup":"","MoneyNumber":""}], "ftReceiptCase":4707387510509010944}</textarea>
+        </div>
+    </div>
+
+    <button id="test" onclick="test()">TEST</button>
+
+    <div>
+        <label for="respdata">Response Daten</label>
+        <div>
+            <textarea id="respdata" name="respdata" cols="80" rows="20" readonly="readonly"></textarea>
+        </div>
+    </div>
+
+
+    <div id="content"></div>
+
+    <script src="fiskaltrust.js"></script>
+</body>
+</html>
