@@ -104,6 +104,9 @@ namespace csClassLibraryCOMInterop
             private fiskaltrust.ifPOS.v0.ReceiptResponse _responseData;
             private SignResponse _signData;
 
+            private JsonSerializerSettings jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
+
+
             public Signer(fiskaltrust.ifPOS.v0.IPOS proxy)
             {
                 _proxy = proxy;
@@ -142,6 +145,21 @@ namespace csClassLibraryCOMInterop
                 get; private set;
             }
 
+            public string requestJson
+            {
+                get
+                {
+                    return JsonConvert.SerializeObject(_requestData, jsonSettings);
+                }
+            }
+
+            public string responseJson
+            {
+                get
+                {
+                    return JsonConvert.SerializeObject(_responseData, jsonSettings);
+                }
+            }
 
             public string ftCashBoxID
             {

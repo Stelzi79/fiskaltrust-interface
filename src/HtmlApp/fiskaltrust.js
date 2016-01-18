@@ -8,7 +8,7 @@ function test() {
     console.log("test start");
 
     var url = $("#serviceurl").val();
-    url += "/rest/json/sign";
+    url += "/json/sign";
     console.log(url);
 
     var reqdata = $("#reqdata").val();

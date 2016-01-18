@@ -24,7 +24,7 @@ namespace csConsoleApplicationREST
             var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
             Console.WriteLine("{0:G} Sign request {1}", DateTime.Now, reqjson);
 
-            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/rest/json/sign");
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/json/sign");
             webreq.Method = "POST";
             webreq.ContentType = "application/json;charset=utf-8";
             byte[] reqecho = Encoding.UTF8.GetBytes(reqjson);
@@ -57,7 +57,7 @@ namespace csConsoleApplicationREST
         static void echo(string url)
         {
 
-            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/rest/json/echo");
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/json/echo");
             webreq.Method = "POST";
             webreq.ContentType = "application/json;charset=utf-8";
             byte[] reqecho = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject("Hello World"));
