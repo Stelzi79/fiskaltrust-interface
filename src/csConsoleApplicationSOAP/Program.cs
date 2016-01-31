@@ -14,6 +14,7 @@ namespace csConsoleApplicationSOAP
         {
 
             string url = "http://localhost:1201/fiskaltrust/POS";
+            //string url = "http://192.168.0.11:1201/fiskaltrust/POS";
 
             var reqdata = getReceiptRequest();
 

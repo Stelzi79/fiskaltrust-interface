@@ -16,9 +16,65 @@ namespace csConsoleApplicationREST
 
             string url = "http://localhost:1201/fiskaltrust/POS";
 
-            echo(url);
+
+            echoJson(url);
+
+            echoXml(url);
+
+            signJson(url);
+
+            signXml(url);
+           
+
+            Console.ReadLine();
+        }
+
+        static void signXml( string url)
+        {
+            var reqdata = getReceiptRequest();
+
+            var ms = new System.IO.MemoryStream();
+            var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(fiskaltrust.ifPOS.v0.ReceiptRequest));
+
+            serializer.WriteObject(ms, reqdata);
+            Console.WriteLine("{0:G} Sign request {1}", DateTime.Now, Encoding.UTF8.GetString(ms.ToArray()));
+
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/xml/sign");
+            webreq.Method = "POST";
+            webreq.ContentType = "application/xml;charset=utf-8";
+
+            webreq.ContentLength = ms.Length;
+            using (var reqStream = webreq.GetRequestStream())
+            {
+                reqStream.Write(ms.ToArray(), 0, (int)ms.Length);
+            }
+
+            var webresp = (HttpWebResponse)webreq.GetResponse();
+            if (webresp.StatusCode == HttpStatusCode.OK)
+            {
+                serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(fiskaltrust.ifPOS.v0.ReceiptResponse));
+                ms = new System.IO.MemoryStream();
+                webresp.GetResponseStream().CopyTo(ms);
+
+                Console.WriteLine("{0:G} Sign response {1}", DateTime.Now, Encoding.UTF8.GetString(ms.ToArray()));
+
+                ms.Position = 0;
+                fiskaltrust.ifPOS.v0.ReceiptResponse resp = (fiskaltrust.ifPOS.v0.ReceiptResponse)serializer.ReadObject(ms);
+            }
+            else
+            {
+                Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+            }
 
 
+
+
+
+        }
+
+
+        static void signJson(string url)
+        {
             var reqdata = getReceiptRequest();
             var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
             var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
@@ -50,11 +106,9 @@ namespace csConsoleApplicationREST
                 Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
             }
 
-
-            Console.ReadLine();
         }
 
-        static void echo(string url)
+        static void echoJson(string url)
         {
 
             var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/json/echo");
@@ -83,6 +137,82 @@ namespace csConsoleApplicationREST
 
         }
 
+        static void echoXml(string url)
+        {
+            string reqdata = "Hello World!";
+
+            var ms = new System.IO.MemoryStream();
+            var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(string));
+
+            serializer.WriteObject(ms, reqdata);
+            Console.WriteLine("{0:G} Sign request {1}", DateTime.Now, Encoding.UTF8.GetString(ms.ToArray()));
+
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/xml/echo");
+            webreq.Method = "POST";
+            webreq.ContentType = "application/xml;charset=utf-8";
+
+
+
+            webreq.ContentLength = ms.Length;
+            using (var reqStream = webreq.GetRequestStream())
+            {
+                reqStream.Write(ms.ToArray(), 0, (int)ms.Length);
+            }
+
+            var webresp = (HttpWebResponse)webreq.GetResponse();
+            if (webresp.StatusCode == HttpStatusCode.OK)
+            {
+                ms = new System.IO.MemoryStream();
+                webresp.GetResponseStream().CopyTo(ms);
+
+                Console.WriteLine("{0:G} Echo {1}", DateTime.Now, Encoding.UTF8.GetString(ms.ToArray()));
+
+                ms.Position = 0;
+                string resp = (string)serializer.ReadObject(ms);
+            }
+            else
+            {
+                Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+            }
+
+
+            /*
+            var ms = new System.IO.MemoryStream();
+
+            var serializer = new System.Xml.Serialization.XmlSerializer(typeof(string));
+            serializer.Serialize(ms, reqdata);
+            Console.WriteLine("{0:G} Sign request {1}", DateTime.Now, Encoding.UTF8.GetString(ms.ToArray()));
+
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/xml/echo");
+            webreq.Method = "POST";
+            webreq.ContentType = "application/xml;charset=utf-8";
+
+
+
+            webreq.ContentLength = ms.Length;
+            using (var reqStream = webreq.GetRequestStream())
+            {
+                reqStream.Write(ms.ToArray(), 0, (int)ms.Length);
+            }
+
+            var webresp = (HttpWebResponse)webreq.GetResponse();
+            if (webresp.StatusCode == HttpStatusCode.OK)
+            {
+                using (var respReader = new System.IO.StreamReader(webresp.GetResponseStream(), Encoding.UTF8))
+                {
+                    string respxml = respReader.ReadToEnd();
+
+                    //var respecho = JsonConvert.DeserializeObject<string>(respReader.ReadToEnd());
+                    Console.WriteLine("{0:G} Echo {1}", DateTime.Now, respxml);
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+            }
+
+            */
+        }
 
         static fiskaltrust.ifPOS.v0.ReceiptRequest getReceiptRequest()
         {
