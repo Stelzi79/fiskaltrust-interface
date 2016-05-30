@@ -45,9 +45,9 @@ the same interface and servie definition is served as an cloud service. you can 
 the launcher uses the file configuration.json from its execution directory to make up its basic configuration. in production use this is done in the fiskaltrust-portal and the launcher tries to read it from the upload-server, related to cashboxid and accesstoken. for offline use this configuration is stored in the execution directory. once the configuration is readed from the execution directory or from upload-server, it is stored localy in the service-folder. the default service-foler ist in windows %ProgramData%\fiskaltrust or in linux /usr/shared/fiskaltrust. in this folder also the database file and the executeables are stored, to completly reset the service delete tihs directory.
 
 ## feedback and bugs
-fiskaltrust is under permanent development, so feel free to discuss her your wishes and our bugs with the github-issure feature.
+fiskaltrust is under permanent development, so feel free to discuss here your wishes and our bugs with the github-issues feature.
 
 # fiscaltrust consulting gmbh
 Bauernmarkt 24, 1010 Wien
-info@fiskaltrust.at
-www.fiskaltrust.at 
+[info@fiskaltrust.at]
+[www.fiskaltrust.at]

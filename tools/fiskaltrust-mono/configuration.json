@@ -3,7 +3,7 @@
   "ftSignaturCreationDevices": [
     {
       "Id": "{3D0E53B7-3F32-4F15-9328-74DBA24ECBFD}",
-      "Package": "fiskaltrust.signing.atrustonline",
+      "Package": "fiskaltrust.signing.atrustapdu",
       "Version": "0.8.16147.550-dev",
       "Configuration": {
         "SerialNumber": "3d0e53b7-3f32-4f15-9328-74dba24ecbfd",
@@ -32,7 +32,7 @@
             "ftCurrentRow": 0,
             "ftQueuedRow": 0,
             "ftReceiptNumerator": 0,
-            "ftReceiptTotalizer": 0.0,
+            "ftReceiptTotalizer": 0,
             "StartMoment": null,
             "StopMoment": null,
             "CountryCode":"AT",
@@ -45,7 +45,7 @@
             "ftCurrentRow": 0,
             "ftQueuedRow": 0,
             "ftReceiptNumerator": 0,
-            "ftReceiptTotalizer": 0.0,
+            "ftReceiptTotalizer": 0,
             "StartMoment": null,
             "StopMoment": null,
             "CountryCode":"AT",
@@ -69,13 +69,13 @@
             "MessageMoment": null,
             "LastSignature": null,
             "ftCashNumerator": 0,
-            "ftCashTotalizer": 0.0,
+            "ftCashTotalizer": 0,
             "ftDeliveryNumerator": 0,
-            "ftDeliveryTotalizer": 0.0,
+            "ftDeliveryTotalizer": 0,
             "ftAgencyNumerator": 0,
-            "ftAgencyTotalizer": 0.0,
+            "ftAgencyTotalizer": 0,
             "ftInternalNumerator": 0,
-            "ftInternalTotalizer": 0.0,
+            "ftInternalTotalizer": 0,
             "TimeStamp": 0
           },
           {
@@ -93,13 +93,13 @@
             "MessageMoment": null,
             "LastSignature": null,
             "ftCashNumerator": 0,
-            "ftCashTotalizer": 0.0,
+            "ftCashTotalizer": 0,
             "ftDeliveryNumerator": 0,
-            "ftDeliveryTotalizer": 0.0,
+            "ftDeliveryTotalizer": 0,
             "ftAgencyNumerator": 0,
-            "ftAgencyTotalizer": 0.0,
+            "ftAgencyTotalizer": 0,
             "ftInternalNumerator": 0,
-            "ftInternalTotalizer": 0.0,
+            "ftInternalTotalizer": 0,
             "TimeStamp": 0
           }
         ],
