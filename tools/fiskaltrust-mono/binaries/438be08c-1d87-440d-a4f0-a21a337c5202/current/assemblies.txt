@@ -1,0 +1,4 @@
+fiskaltrust.interface.0.6.16135.362-beta\lib\net40\fiskaltrust.ifPOS.net40.dll
+BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll
+Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll
+fiskaltrust.service.sqlite.mono.0.7.16150.577-beta\lib\net40\fiskaltrust.service.sqlite.mono40.dll
