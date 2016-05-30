@@ -17,7 +17,7 @@
     {
       "Id": "{438BE08C-1D87-440D-A4F0-A21A337C5202}",
       "Package": "fiskaltrust.service.sqlite.mono",
-      "Version": "0.7.16150.577-beta",
+      "Version": "0.7.16151.580-beta",
       "Configuration": {
         "Mode": "single",
         "sslvalidation": false,
@@ -35,6 +35,8 @@
             "ftReceiptTotalizer": 0.0,
             "StartMoment": null,
             "StopMoment": null,
+            "CountryCode":"AT",
+            "Timeout":15000,
             "TimeStamp": 0
           },
           {
@@ -46,6 +48,8 @@
             "ftReceiptTotalizer": 0.0,
             "StartMoment": null,
             "StopMoment": null,
+            "CountryCode":"AT",
+            "Timeout":15000,
             "TimeStamp": 0
           }
         ],

@@ -234,3 +234,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+/tools/fiskaltrust-mono/binaries/3d0e53b7-3f32-4f15-9328-74dba24ecbfd/current/fiskaltrust.interface.0.6.16135.362-beta/content/docs/fiskaltrust-POS-Schnittstellenbeschreibung.pdf
+/tools/fiskaltrust-mono/binaries/438be08c-1d87-440d-a4f0-a21a337c5202/current/fiskaltrust.interface.0.6.16135.362-beta/content/docs/fiskaltrust-POS-Schnittstellenbeschreibung.pdf
+/tools/download.ps1
+/tools/nuget/nuget.exe
