@@ -3,24 +3,22 @@
   "ftSignaturCreationDevices": [
     {
       "Id": "{3D0E53B7-3F32-4F15-9328-74DBA24ECBFD}",
-      "Package": "fiskaltrust.signing.atrustapdu",
+      "Package": "fiskaltrust.signing.atrustonline",
       "Version": "0.8.16147.550-dev",
       "Configuration": {
         "SerialNumber": "3d0e53b7-3f32-4f15-9328-74dba24ecbfd",
-        "Mode": "normal",
-        "sslvalidation": false
+        "Mode": "normal"
       },
-      "Url": [ "http://localhost:8523/3D0E53B7-3F32-4F15-9328-74DBA24ECBFD" ]
+      "Url": [ "net.pipe://localhost/3D0E53B7-3F32-4F15-9328-74DBA24ECBFD" ]
     }
   ],
   "ftQueues": [
     {
       "Id": "{438BE08C-1D87-440D-A4F0-A21A337C5202}",
-      "Package": "fiskaltrust.service.sqlite.mono",
+      "Package": "fiskaltrust.service.sqlite",
       "Version": "0.7.16151.580-beta",
       "Configuration": {
         "Mode": "single",
-        "sslvalidation": false,
         "init_ftCashBox": {
           "ftCashBoxId": "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
           "TimeStamp": 0
@@ -106,7 +104,7 @@
         "init_ftSignaturCreationUnitAT": [
           {
             "ftSignaturCreationUnitATId": "3d0e53b7-3f32-4f15-9328-74dba24ecbfd",
-            "Url": "http://localhost:8523/3D0E53B7-3F32-4F15-9328-74DBA24ECBFD",
+            "Url": "net.pipe://localhost/3D0E53B7-3F32-4F15-9328-74DBA24ECBFD",
             "ZDA": "AT0",
             "SN": "3d0e53b7-3f32-4f15-9328-74dba24ecbfd",
             "CertificateBase64": "MIIEvTCCA6WgAwIBAgIEIVm59jANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBgwCQVQxSDBGBgNVBAoMP0EtVHJ1c3QgR2VzLiBmLiBTaWNoZXJoZWl0c3N5c3RlbWUgaW0gZWxla3RyLiBEYXRlbnZlcmtlaHIgR21iSDEjMCEGA1UECwwaYS1zaWduLVByZW1pdW0tVGVzdC1TaWctMDIxIzAhBgNVBAMMGmEtc2lnbi1QcmVtaXVtLVRlc3QtU2lnLTAyMB4XDTE2MDMxMDE0NDczOVoXDTIwMDUxMDE0NDczOVowYzELMAkGA1UEBgwCQVQxGTAXBgNVBAMMEFVJRDogQVRVMTIzNDU2NzgxFDASBgNVBAQMC0FUVTEyMzQ1Njc4MQwwCgYDVQQqDANVSUQxFTATBgNVBAUMDDUyOTkxMjU1MjI4NjBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABDmCCjepLRPT+MvR4CHqycC25UNfFaFcyqCL8lwEVsUVk10bmQn290u20foEaa075geQvJokWbTwTQqLgORYVVejggIDMIIB/zCBhAYIKwYBBQUHAQEEeDB2MEYGCCsGAQUFBzAChjpodHRwOi8vd3d3LmEtdHJ1c3QuYXQvY2VydHMvYS1zaWduLVByZW1pdW0tVGVzdC1TaWctMDIuY3J0MCwGCCsGAQUFBzABhiBodHRwOi8vb2NzcC10ZXN0LmEtdHJ1c3QuYXQvb2NzcDAOBgNVHQ8BAf8EBAMCBsAwJwYIKwYBBQUHAQMBAf8EGDAWMAgGBgQAjkYBATAKBggrBgEFBQcLATCBrgYDVR0fBIGmMIGjMIGgoIGdoIGahoGXbGRhcDovL2xkYXAtdGVzdC5hLXRydXN0LmF0L291PWEtc2lnbi1QcmVtaXVtLVRlc3QtU2lnLTAyIChTSEEtMjU2KSxvPUEtVHJ1c3QsYz1BVD9jZXJ0aWZpY2F0ZXJldm9jYXRpb25saXN0P2Jhc2U/b2JqZWN0Y2xhc3M9ZWlkQ2VydGlmaWNhdGlvbkF1dGhvcml0eTAJBgNVHRMEAjAAMFkGA1UdIARSMFAwCAYGBACLMAEBMEQGBiooABEBCzA6MDgGCCsGAQUFBwIBFixodHRwOi8vd3d3LmEtdHJ1c3QuYXQvZG9jcy9jcC9hLXNpZ24tUHJlbWl1bTATBgNVHSMEDDAKgAhGBp+OQY4VvTARBgNVHQ4ECgQITEStzGF8AcEwDQYJKoZIhvcNAQELBQADggEBADKLJSnaG7sMsX0USrzLHRXuWPKCrOXbLfXmnmlAN2+2Pzd/wAXXL1G2dpRpyspoC4QxLVQrUQE+WQae94lXdI7yFwVk8Y5bR+K/bY/EfNSPiwSyxXtYOnMrH+s9szH5nCG4aRGxys5hrbxfyS8GHXqv8V6cUlddCYkwXL4XXBpSxh9UofVOA1+mtKEtESg9ifcayV6TwBOHmzg7GZe0IY32VIpjaJQA8LQU1YDARx+yfuxtc4KBk3o5ZaVmZ4xyX/elUTLQX8aMnT7sIbhA3+FFvaD70iYp+9kZL9LO9bzfS/yv0xmPjFLVQ817DwTHM1ZFGk5d6WRGBIm7fjq8QuM=",
@@ -114,7 +112,7 @@
           }
         ]
       },
-      "Url": [ "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202" ]
+      "Url": [ "net.pipe://localhost/438BE08C-1D87-440D-A4F0-A21A337C5202", "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202" ]
     }
   ],
   "helpers": [
@@ -125,5 +123,5 @@
     }
   ],
   "Url": "http://localhost:1200/fiskaltrust",
-  "TimeStamp":636001601556179823
+  "TimeStamp":636001601556179826
 }
