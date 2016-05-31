@@ -139,10 +139,12 @@ namespace csConsoleApplicationSOAP
         {
             if (data != null)
             {
-                Console.WriteLine($"========== n: {data.cbReceiptReference} CashBoxIdentificateion:{data.ftCashBoxIdentification} ReceiptIdentification:{data.ftReceiptIdentification} ==========");
+                //Console.WriteLine($"========== n: {data.cbReceiptReference} CashBoxIdentificateion:{data.ftCashBoxIdentification} ReceiptIdentification:{data.ftReceiptIdentification} ==========");
+                Console.WriteLine("========== n: {0} CashBoxIdentificateion:{1} ReceiptIdentification:{2} ==========", data.cbReceiptReference, data.ftCashBoxIdentification, data.ftReceiptIdentification);
                 foreach (var item in data.ftSignatures)
                 {
-                    Console.WriteLine($"{item.Caption}:{item.Data}");
+                    //Console.WriteLine($"{item.Caption}:{item.Data}");
+                    Console.WriteLine("{0}:{1}", item.Caption, item.Data);
                 }
             }
             else
