@@ -21,6 +21,7 @@ namespace csConsoleApplicationSOAP
             // to reset data delete folder %ProgrammData%\fiskaltrust
 
             string url = "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
+            //string url = "http://localhost:1200/fiskaltrust/pos";
             //string url = "http://192.168.0.18:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
 
 

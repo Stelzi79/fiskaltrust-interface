@@ -120,8 +120,16 @@
       "Package": "fiskaltrust.service.helper.debug",
       "Version": "0.7.16150.577-beta",
       "Configuration": { }
+    },
+    {
+      "Package": "fiskaltrust.service.helper.balancer",
+      "Version": "0.7.16153.592-beta",
+      "Configuration": {
+        "host": "http://localhost:1200/fiskaltrust/POS",
+        "client_438BE08C-1D87-440D-A4F0-A21A337C5202": "net.pipe://localhost/438BE08C-1D87-440D-A4F0-A21A337C5202"
+      }
     }
   ],
   "Url": "http://localhost:1200/fiskaltrust",
-  "TimeStamp":636001601556179826
+  "TimeStamp":636001601556179829
 }
