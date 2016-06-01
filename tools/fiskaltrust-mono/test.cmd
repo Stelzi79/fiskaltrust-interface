@@ -1,1 +1,0 @@
-fiskaltrust.mono.exe -cashboxid={f9bb4d9f-db98-4c24-a614-87f9d874f0cc} -useoffline=true -test 
