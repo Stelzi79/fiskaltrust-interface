@@ -22,7 +22,7 @@ namespace csConsoleApplicationSOAP
 
             string url = "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
             //string url = "http://localhost:1200/fiskaltrust/pos";
-            //string url = "http://192.168.0.18:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
+            //string url = "http://192.168.0.19:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
 
 
 
@@ -79,6 +79,11 @@ namespace csConsoleApplicationSOAP
             var sr = new System.IO.StreamReader(stream);
 
             Console.WriteLine("========== RKSV-DEP ==========");
+
+            //string journal = sr.ReadToEnd();
+            //System.IO.File.WriteAllText($"c:\\temp\\rksv-dep-{DateTime.Now.Ticks}.txt", journal);
+            //Console.WriteLine(journal);
+
             Console.WriteLine(sr.ReadToEnd());
             
 
@@ -144,8 +149,14 @@ namespace csConsoleApplicationSOAP
                 Console.WriteLine("========== n: {0} CashBoxIdentificateion:{1} ReceiptIdentification:{2} ==========", data.cbReceiptReference, data.ftCashBoxIdentification, data.ftReceiptIdentification);
                 foreach (var item in data.ftSignatures)
                 {
+                    if (item.ftSignatureFormat == 0x03)
+                    {
+                        fiskaltrust.ifPOS.Utilities.QR_TextChars(item.Data, 64, true);
+                    }
+
                     //Console.WriteLine($"{item.Caption}:{item.Data}");
                     Console.WriteLine("{0}:{1}", item.Caption, item.Data);
+
                 }
             }
             else
