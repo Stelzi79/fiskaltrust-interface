@@ -1,5 +1,5 @@
 # GERMAN README:
-[see english readme]("fiskaltrust.interface EN")
+[see english readme](#fiskaltrust.interface-EN)
 
 
 # fiskaltrust.Interface
