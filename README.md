@@ -1,5 +1,6 @@
 # fiskaltrust.Interface
 [see english readme](#fiskaltrust.interface-en)
+
 Beispiel, wie man das fiskaltrust.Interface nutzt.
 
 fiskaltrust bietet eine gesetzeskonforme Sicherheitseinrichtung für Registrierkassen.
@@ -31,17 +32,12 @@ Neben Mono-complete 3.x / 4.x ist auch SQLite und pcsclite Voraussetzung, wenn e
 
 Typisch ausführbare Befehle:
 
-sudo apt-get update
-
+```sudo apt-get update
 sudo apt-get install mono-complete
-
 sudo apt-get install sqlite
-
 sudo apt-get install pcsclite
-
 cd fiskaltrust-mono
-
-sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test
+sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## Hosting unter Windows
 Der launcher (fiskaltrust.exe) ist als Windows-Dienst für die Produktionsumgebung entwickelt. Es wird auch die Möglichkeit einer automatisierte Installation durch Befehlszeilenparameter unterstützt. Details sind in der Entwickler-Dokumentation zu finden.
@@ -53,9 +49,8 @@ Hierfür ist nur .net4 Voraussetzung.
 Typisch ausführbare Befehle:
 (command-line mit Administrationsrecht starten)
 
-cd fiskaltrust-net40
-
-fiskaltrust -cashboxid= -test
+```cd fiskaltrust-net40
+fiskaltrust -cashboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -test```
 
 ## Cloud-basiert
 Die gleiche Schnittstellen- und service-Definitionen werden als Cloud-Service unterstützt. Das als lokales Service entwickelte SOAP- und REST-Interface kann nahtlos in einen Cloud-Service gewechselt werden.
@@ -109,18 +104,12 @@ For test and development, the command-line parameter -test can be used.
 Prerequisites beside mono-complete 3.x / 4.x are also sqlite and pcsclite if you want to use an usb-based signature creation unit.
 
 Typical commands to run:
-
-sudo apt-get update
-
+```sudo apt-get update
 sudo apt-get install mono-complete
-
 sudo apt-get install sqlite
-
 sudo apt-get install pcsclite
-
 cd fiskaltrust-mono
-
-sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test
+sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## hosting on windows
 The launcher (fiskaltrust.exe) is constructed to act as an windows service in production environment. For this also automated installation is supported by command-line parameter. ((You can find details in the developer documentation.)
@@ -130,10 +119,8 @@ For test and develop the command-line parameter -test can be used to run the ser
 Only .net4 is prerequisites.
 
 Typical commands to run: (open command-line with administration permission)
-
-cd fiskaltrust-net40
-
-fiskaltrust -cashboxid= -test
+```cd fiskaltrust-net40
+fiskaltrust -cashboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -test```
 
 ## cloud based
 The same interface and service definition is served as an cloud service. You can use SOAP and REST interface designed for local service to seamless switch over to the cloud service.
