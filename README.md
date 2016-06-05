@@ -1,5 +1,5 @@
 # fiskaltrust.Interface
-[see english readme](#fiskaltrust.interface-en)
+[see english readme](en)
 
 Beispiel, wie man das fiskaltrust.Interface nutzt.
 
@@ -75,7 +75,7 @@ Bauernmarkt 24, 1010 Wien
 
 ---
 
-#fiskaltrust.interface EN
+[en]: #fiskaltrust.interface EN
 Examples how to use fiskaltrust.interface.
 
 fiskaltrust offers a legal compliant cash register security mechanism.
@@ -107,7 +107,8 @@ For test and development, the command-line parameter -test can be used.
 Prerequisites beside mono-complete 3.x / 4.x are also sqlite and pcsclite if you want to use an usb-based signature creation unit.
 
 Typical commands to run:
-```sudo apt-get update  
+
+```sudo apt-get update
 
 sudo apt-get install mono-complete
 
