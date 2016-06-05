@@ -1,14 +1,14 @@
-___
-# DEUTSCH:
-...
+# GERMAN README:
+(EN see below)
+
 
 # fiskaltrust.Interface
 Beispiel, wie man das fiskaltrust.Interface nutzt.
 
 fiskaltrust bietet eine gesetzeskonforme Sicherheitseinrichtung für Registrierkassen.
 
-## documentation
-Die detaillierte Dokumentation ist auf dem fiskaltrust.Portal [https://portal.fiskaltrust.at] nach der Registrierung und Aktivierung der Rolle als Registrierkassenhersteller verfügbar.
+## Dokumentation
+Die detaillierte Dokumentation ist auf dem fiskaltrust.Portal [https://portal.fiskaltrust.at] nach der Registrierung und Aktivierung der Rolle als Registrierkassenhersteller (in der Übersicht) verfügbar.
 
 Um Ihren Entwicklung zu erleichtern, stellen wir auch ein nuget-package [https://nuget.org] mit der packageId fiskaltrust.interface zur Verfügung.
 
@@ -63,21 +63,22 @@ fiskaltrust -cashboxid= -test
 Die gleiche Schnittstellen- und service-Definitionen werden als Cloud-Service unterstützt. Das als lokales Service entwickelte SOAP- und REST-Interface kann nahtlos in einen Cloud-Service gewechselt werden.
 
 ## Informationen zu Tests
-Der Launcher verwendet die Datei configuration.json von seinem Ausführungsverzeichnis um die Basiskonfiguration aufzubauen. Im Produktionsbetrieb wird diese Konfiguration im fiskaltrust-Portal vorgenommen und der launcher versucht, diese vom Upload-Server auszulesen um die cashboxid und den accesstoken zu beziehen. Zur Offline-Nutzung wird diese Konfiguration im Ausführungsverzeichnis gespeichert. Sobald die Konfiguration aus dem Ausführungsverzeichnis oder von Upload-Server ausgelesen wird, wird es im lokalen Service-Ordner gespeichert. Der Standard-Service-Ordner ist unter Windows %Programdata%\fiskaltrust oder in Linux /usr/shared/fiskaltrust. In diesem Ordner werden auch die Datenbankdatei und die ausführbaren Dateien gespeichert. 
+Der Launcher verwendet die Datei configuration.json von seinem Ausführungsverzeichnis um die Basiskonfiguration aufzubauen. Im Produktionsbetrieb wird diese Konfiguration im fiskaltrust-Portal vorgenommen und der launcher versucht, diese vom Upload-Server auszulesen um die cashboxid und den accesstoken zu beziehen. Zur Offline-Nutzung wird diese Konfiguration im Ausführungsverzeichnis gespeichert. Sobald die Konfiguration aus dem Ausführungsverzeichnis oder von Upload-Server ausgelesen wird, wird es im lokalen Service-Ordner gespeichert. Der Standard-Service-Ordner ist unter Windows %Programdata%\fiskaltrust oder in Linux /usr/shared/fiskaltrust. In diesem Ordner werden auch die Datenbankdatei und die ausführbaren Dateien gespeichert.
 
 Um den Dienst vollständig zurückzusetzen, kann das komplette Verzeichnis gelöscht werden.
 
 ## Feedback und Bugs
 fiskaltrust wird ständig weiterentwickelt. Nutzen Sie bitte die Möglichkeit, durch Github-Fragen Ihre Wünsche und unsere Fehler zu diskutieren.
 
-# Fiscaltrust consulting gmbh
+## Fiscaltrust consulting gmbh
 Bauernmarkt 24, 1010 Wien
+
 [info@fiskaltrust.at]
+
 [www.fiskaltrust.at]
 
-...
-# ENGLISH:
-...
+---
+# ENGLISH README:
 
 # fiskaltrust.interface
 Examples how to use fiskaltrust.interface.
@@ -148,7 +149,9 @@ In this folder also the database file and the executeables are stored, to comple
 ## feedback and bugs
 fiskaltrust is under permanent development, so feel free to discuss here your wishes and our bugs with the github-issues feature.
 
-# fiscaltrust consulting gmbh
+## Fiscaltrust consulting gmbh
 Bauernmarkt 24, 1010 Wien
+
 [info@fiskaltrust.at]
+
 [www.fiskaltrust.at]
