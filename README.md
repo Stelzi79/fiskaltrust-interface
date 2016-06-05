@@ -75,7 +75,7 @@ Bauernmarkt 24, 1010 Wien
 
 [info@fiskaltrust.at]
 
-[www.fiskaltrust.at]
+[www.fiskaltrust.at](https://www.fiskaltrust.at)
 
 ---
 # ENGLISH README:
@@ -154,4 +154,4 @@ Bauernmarkt 24, 1010 Wien
 
 [info@fiskaltrust.at]
 
-[www.fiskaltrust.at]
+[www.fiskaltrust.at](https://www.fiskaltrust.at)
