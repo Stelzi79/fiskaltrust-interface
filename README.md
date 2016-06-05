@@ -32,11 +32,16 @@ Neben Mono-complete 3.x / 4.x ist auch SQLite und pcsclite Voraussetzung, wenn e
 
 Typisch ausführbare Befehle:
 
-```sudo apt-get update  
-sudo apt-get install mono-complete  
-sudo apt-get install sqlite  
-sudo apt-get install pcsclite  
-cd fiskaltrust-mono  
+```sudo apt-get update
+
+sudo apt-get install mono-complete
+
+sudo apt-get install sqlite
+
+sudo apt-get install pcsclite
+
+cd fiskaltrust-mono
+
 sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## Hosting unter Windows
@@ -103,10 +108,15 @@ Prerequisites beside mono-complete 3.x / 4.x are also sqlite and pcsclite if you
 
 Typical commands to run:
 ```sudo apt-get update  
-sudo apt-get install mono-complete  
-sudo apt-get install sqlite  
-sudo apt-get install pcsclite  
-cd fiskaltrust-mono  
+
+sudo apt-get install mono-complete
+
+sudo apt-get install sqlite
+
+sudo apt-get install pcsclite
+
+cd fiskaltrust-mono
+
 sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## hosting on windows
@@ -131,7 +141,7 @@ In this folder also the database file and the executeables are stored, to comple
 ## feedback and bugs
 fiskaltrust is under permanent development, so feel free to discuss here your wishes and our bugs with the github-issues feature.
 
-## Fiscaltrust consulting gmbh
-Bauernmarkt 24, 1010 Wien
-[info@fiskaltrust.at]
+## fiskaltrust consulting gmbh
+Bauernmarkt 24, 1010 Wien  
+[info@fiskaltrust.at]  
 [www.fiskaltrust.at](https://www.fiskaltrust.at)
