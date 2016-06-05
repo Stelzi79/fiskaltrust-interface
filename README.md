@@ -1,8 +1,5 @@
-# GERMAN README:
-[see english readme](#fiskaltrust.interface-EN)
-
-
 # fiskaltrust.Interface
+[see english readme](#fiskaltrust.interface-en)
 Beispiel, wie man das fiskaltrust.Interface nutzt.
 
 fiskaltrust bietet eine gesetzeskonforme Sicherheitseinrichtung für Registrierkassen.
@@ -79,7 +76,6 @@ Bauernmarkt 24, 1010 Wien
 [www.fiskaltrust.at](https://www.fiskaltrust.at)
 
 ---
-# ENGLISH README:
 
 #fiskaltrust.interface EN
 Examples how to use fiskaltrust.interface.
