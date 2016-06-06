@@ -32,16 +32,11 @@ Neben Mono-complete 3.x / 4.x ist auch SQLite und pcsclite Voraussetzung, wenn e
 
 Typisch ausführbare Befehle:
 
-```sudo apt-get update
-
-sudo apt-get install mono-complete
-
-sudo apt-get install sqlite
-
-sudo apt-get install pcsclite
-
-cd fiskaltrust-mono
-
+```sudo apt-get update    
+sudo apt-get install mono-complete    
+sudo apt-get install sqlite    
+sudo apt-get install pcsclite    
+cd fiskaltrust-mono    
 sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## Hosting unter Windows
