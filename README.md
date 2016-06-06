@@ -1,8 +1,6 @@
-# GERMAN README:
-(EN see below)
-
-
 # fiskaltrust.Interface
+[see english readme](en)
+
 Beispiel, wie man das fiskaltrust.Interface nutzt.
 
 fiskaltrust bietet eine gesetzeskonforme Sicherheitseinrichtung für Registrierkassen.
@@ -15,7 +13,8 @@ Um Ihren Entwicklung zu erleichtern, stellen wir auch ein nuget-package [https:/
 ## Verbindung mit der fiskaltrust.securitymechanism (Sicherheitseinrichtung)
 Als Basis-Technologie zur Kommunikation wird WCF verwendet. Zur lokalen, internen Kommunikation zwischen queues, signature creation units (Signaturerstellungseinheiten) und benutzerspezifischen Modulen (Sonstigen Modulen) wird am besten das net.pipe protocoll verwendet. Zur Kommunikation zwischen verschiedenen Plattformen wird am besten basic http verwendet.
 ### SOAP
-SOAP wird mit dem http-Protokoll der wcf-Kommunikation ausgeliefert. Um die WSDL-Datei zu erhalten, kann man diesen Debug-Build verwenden und auf die konfigurierte http-Adresse gehen. Hierbei wird [http: // localhost: 8524 / 438BE08C-1D87-440D-A4F0-A21A337C5202] verwendet. Eine weitere Option besteht darin, die Datei aus dem Ordner tools/wsdl zu verwenden.
+SOAP wird mit dem http-Protokoll der wcf-Kommunikation ausgeliefert. Um die WSDL-Datei zu erhalten, kann man diesen Debug-Build verwenden und auf die konfigurierte http-Adresse gehen. Hierbei wird [http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202] verwendet. Eine weitere Option besteht darin, die Datei aus dem Ordner tools/wsdl zu verwenden.
+
 ### REST
 REST steht sowohl in XML als auch in JSON zur Verfügung. Es stehen benutzerspezifische Module zur Verfügung, die geladen werden können, um die Basis-Services möglichest schlank zu halten.
 ### native TCP-IP und Serielle RS232/485/422
@@ -33,7 +32,7 @@ Neben Mono-complete 3.x / 4.x ist auch SQLite und pcsclite Voraussetzung, wenn e
 
 Typisch ausführbare Befehle:
 
-sudo apt-get update
+```sudo apt-get update
 
 sudo apt-get install mono-complete
 
@@ -43,7 +42,7 @@ sudo apt-get install pcsclite
 
 cd fiskaltrust-mono
 
-sudo mono fiskaltrust.mono.exe -caschboxid= -useoffline=true -test
+sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## Hosting unter Windows
 Der launcher (fiskaltrust.exe) ist als Windows-Dienst für die Produktionsumgebung entwickelt. Es wird auch die Möglichkeit einer automatisierte Installation durch Befehlszeilenparameter unterstützt. Details sind in der Entwickler-Dokumentation zu finden.
@@ -55,9 +54,8 @@ Hierfür ist nur .net4 Voraussetzung.
 Typisch ausführbare Befehle:
 (command-line mit Administrationsrecht starten)
 
-cd fiskaltrust-net40
-
-fiskaltrust -cashboxid= -test
+```cd fiskaltrust-net40
+fiskaltrust -cashboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -test```
 
 ## Cloud-basiert
 Die gleiche Schnittstellen- und service-Definitionen werden als Cloud-Service unterstützt. Das als lokales Service entwickelte SOAP- und REST-Interface kann nahtlos in einen Cloud-Service gewechselt werden.
@@ -71,16 +69,13 @@ Um den Dienst vollständig zurückzusetzen, kann das komplette Verzeichnis gelösch
 fiskaltrust wird ständig weiterentwickelt. Nutzen Sie bitte die Möglichkeit, durch Github-Fragen Ihre Wünsche und unsere Fehler zu diskutieren.
 
 ## Fiscaltrust consulting gmbh
-Bauernmarkt 24, 1010 Wien
-
-[info@fiskaltrust.at]
-
+Bauernmarkt 24, 1010 Wien  
+[info@fiskaltrust.at]  
 [www.fiskaltrust.at](https://www.fiskaltrust.at)
 
 ---
-# ENGLISH README:
 
-# fiskaltrust.interface
+[en]: #fiskaltrust.interface EN
 Examples how to use fiskaltrust.interface.
 
 fiskaltrust offers a legal compliant cash register security mechanism.
@@ -113,7 +108,7 @@ Prerequisites beside mono-complete 3.x / 4.x are also sqlite and pcsclite if you
 
 Typical commands to run:
 
-sudo apt-get update
+```sudo apt-get update
 
 sudo apt-get install mono-complete
 
@@ -123,7 +118,7 @@ sudo apt-get install pcsclite
 
 cd fiskaltrust-mono
 
-sudo mono fiskaltrust.mono.exe -caschboxid= -useoffline=true -test
+sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
 
 ## hosting on windows
 The launcher (fiskaltrust.exe) is constructed to act as an windows service in production environment. For this also automated installation is supported by command-line parameter. ((You can find details in the developer documentation.)
@@ -133,25 +128,21 @@ For test and develop the command-line parameter -test can be used to run the ser
 Only .net4 is prerequisites.
 
 Typical commands to run: (open command-line with administration permission)
-
-cd fiskaltrust-net40
-
-fiskaltrust -cashboxid= -test
+```cd fiskaltrust-net40
+fiskaltrust -cashboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -test```
 
 ## cloud based
 The same interface and service definition is served as an cloud service. You can use SOAP and REST interface designed for local service to seamless switch over to the cloud service.
 
 ## test related informations
-The launcher uses the file configuration.json from its execution directory to make up its basic configuration. In production use this is done in the fiskaltrust-portal and the launcher tries to read it from the upload-server, related to cashboxid and accesstoken. For offline use this configuration is stored in the execution directory. Once the configuration is readed from the execution directory or from upload-server, it is stored localy in the service-folder. The default service-foler ist in windows %ProgramData%\fiskaltrust or in linux /usr/shared/fiskaltrust. 
+The launcher uses the file configuration.json from its execution directory to make up its basic configuration. In production use this is done in the fiskaltrust-portal and the launcher tries to read it from the upload-server, related to cashboxid and accesstoken. For offline use this configuration is stored in the execution directory. Once the configuration is readed from the execution directory or from upload-server, it is stored localy in the service-folder. The default service-foler ist in windows %ProgramData%\fiskaltrust or in linux /usr/shared/fiskaltrust.
 
 In this folder also the database file and the executeables are stored, to completly reset the service delete tihs directory.
 
 ## feedback and bugs
 fiskaltrust is under permanent development, so feel free to discuss here your wishes and our bugs with the github-issues feature.
 
-## Fiscaltrust consulting gmbh
-Bauernmarkt 24, 1010 Wien
-
-[info@fiskaltrust.at]
-
+## fiskaltrust consulting gmbh
+Bauernmarkt 24, 1010 Wien  
+[info@fiskaltrust.at]  
 [www.fiskaltrust.at](https://www.fiskaltrust.at)
