@@ -1,5 +1,5 @@
 # fiskaltrust.Interface
-[see english readme](#fiskaltrust.interface-en)
+[see english readme](#fiskaltrust-interface-en)
 
 Beispiel, wie man das fiskaltrust.Interface nutzt.
 
