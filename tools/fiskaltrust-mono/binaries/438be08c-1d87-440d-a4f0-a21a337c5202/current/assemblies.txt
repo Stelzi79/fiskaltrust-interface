@@ -1,0 +1,9 @@
+fiskaltrust.interface.0.7.16146.548-dev\lib\net40\fiskaltrust.ifPOS.net40.dll
+ZXing.Net.0.14.0.1\lib\net40\zxing.dll
+ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll
+ZXing.Net.0.14.0.1\lib\sl4-wp71\zxing.wp7.1.dll
+ZXing.Net.0.14.0.1\lib\sl4\zxing.sl4.dll
+fiskaltrust.interface.utilities.0.7.16149.574-dev\lib\net40\fiskaltrust.ifPOS.Utilities.net40.dll
+BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll
+Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll
+fiskaltrust.service.sqlite.mono.0.7.16151.580-beta\lib\net40\fiskaltrust.service.sqlite.mono40.dll
