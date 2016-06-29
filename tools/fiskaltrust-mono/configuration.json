@@ -3,7 +3,7 @@
   "ftSignaturCreationDevices": [
     {
       "Id": "{3D0E53B7-3F32-4F15-9328-74DBA24ECBFD}",
-      "Package": "fiskaltrust.signing.atrustapdu",
+      "Package": "fiskaltrust.signing.pfx",
       "Version": "0.8.16147.550-dev",
       "Configuration": {
         "SerialNumber": "3d0e53b7-3f32-4f15-9328-74dba24ecbfd",
@@ -16,7 +16,7 @@
   "ftQueues": [
     {
       "Id": "{438BE08C-1D87-440D-A4F0-A21A337C5202}",
-      "Package": "fiskaltrust.service.sqlite.mono",
+      "Package": "fiskaltrust.service.sqlite",
       "Version": "0.7.16151.580-beta",
       "Configuration": {
         "Mode": "single",

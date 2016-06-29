@@ -1,5 +1,4 @@
 BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll
 fiskaltrust.interface.0.6.16135.362-beta\lib\net40\fiskaltrust.ifPOS.net40.dll
-PCSC.3.5.0\lib\net40\pcsc-sharp.dll
-fiskaltrust.signing.atrustapdu.0.8.16147.550-dev\lib\net40\fiskaltrust.signing.atrustapdu.net40.dll
-fiskaltrust.signing.atrustapdu.0.8.16147.550-dev\lib\net40\fiskaltrust.signing.core.net40.dll
+fiskaltrust.signing.pfx.0.8.16147.550-dev\lib\net40\fiskaltrust.signing.core.net40.dll
+fiskaltrust.signing.pfx.0.8.16147.550-dev\lib\net40\fiskaltrust.signing.pfx.net40.dll
