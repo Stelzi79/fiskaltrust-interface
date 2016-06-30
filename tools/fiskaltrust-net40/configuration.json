@@ -4,7 +4,7 @@
     {
       "Id": "{3D0E53B7-3F32-4F15-9328-74DBA24ECBFD}",
       "Package": "fiskaltrust.signing.atrustonline",
-      "Version": "0.8.16147.550-dev",
+      "Version": "0.8.16177.680-dev",
       "Configuration": {
         "SerialNumber": "3d0e53b7-3f32-4f15-9328-74dba24ecbfd",
         "Mode": "normal"
@@ -112,7 +112,7 @@
           }
         ]
       },
-      "Url": [ "net.pipe://localhost/438BE08C-1D87-440D-A4F0-A21A337C5202", "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202" ]
+      "Url": [ "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202", "net.pipe://localhost/438BE08C-1D87-440D-A4F0-A21A337C5202" ]
     }
   ],
   "helpers": [
