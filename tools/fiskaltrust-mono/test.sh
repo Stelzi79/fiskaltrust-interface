@@ -1,1 +1,1 @@
-sudo mono fiskaltrust.mono.exe -cashboxid={f9bb4d9f-db98-4c24-a614-87f9d874f0cc} -useoffline=true -test 
+mono fiskaltrust.mono.exe -cashboxid=5f4b1438-8aca-4eda-954f-ec450ed17bde  -accesstoken=BEchmMiRzFCG4FLAxv2vQK+otzcnY6iJXTjGf/Ow/muQROkITCht3ctnUF6pDEmR9XCAzn0LQpQmO6qPyQd37OY=  -sandbox  -useoffline  -sslvalidation -test

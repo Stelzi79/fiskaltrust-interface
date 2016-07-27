@@ -16,9 +16,17 @@ namespace csConsoleApplicationREST
         static void Main(string[] args)
         {
 
+            //signaturcloud 1 ef
             string url = "https://signaturcloud-sandbox.fiskaltrust.at/";
-            Guid cashboxid = Guid.Parse("{f9bb4d9f-db98-4c24-a614-87f9d874f0cc}");
-            string accesstoken = "0123456789abcdef";
+            Guid cashboxid = Guid.Parse("654fd35d-75eb-49e2-90cd-2980c67350cf");
+            string accesstoken = "BIlyGYZPJXOnwx+MyVekpAFXOjpPFim5+U8EHxuKbOcF/CAA6kSNg1Im+mZstNiIuT0F946RbRPRTO+H6Ngq9q8=";
+
+            //signaturcloud 2 ef
+            //string url = "https://signaturcloud-sandbox.fiskaltrust.at/";
+            //Guid cashboxid = Guid.Parse("555881f6-4c89-4265-ba39-01f109456d57");
+            //string accesstoken = "BGYpiOMteelPfdOIjBzPd1Ny6lUvz4tSUmBgOypYPtKc8f5mDo7tNuTlp34xhddoxGX3XFWWMQH9Br+5i165rd0=";
+
+
 
             echoJson(url, cashboxid, accesstoken);
 
@@ -27,6 +35,8 @@ namespace csConsoleApplicationREST
             signJson(url, cashboxid, accesstoken);
 
             signXml(url, cashboxid, accesstoken);
+
+            journalJson(url, cashboxid, accesstoken);
 
             Console.ReadKey();
         }
@@ -148,7 +158,7 @@ namespace csConsoleApplicationREST
 
         static void signXml(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
         {
-            var reqdata = UseCase17Request(1);
+            var reqdata = UseCase17Request(1,5,5,cashboxid.ToString());
 
             var ms = new System.IO.MemoryStream();
             var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(fiskaltrust.ifPOS.v0.ReceiptRequest));
@@ -195,7 +205,7 @@ namespace csConsoleApplicationREST
 
         static void signJson(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
         {
-            var reqdata = UseCase17Request(1);
+            var reqdata = UseCase17Request(1,5,5,cashboxid.ToString());
 
             var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
             var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
@@ -235,16 +245,54 @@ namespace csConsoleApplicationREST
         }
 
 
-        internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m)
+        //static void journalJson(string url, Guid cashboxid=default(Guid), string accesstoken="00000000")
+        //{
+        //    Console.WriteLine("{0:G} Journal request", DateTime.Now);
+
+        //    //var stream = proxy.Journal(0x4154000000000001, 0, DateTime.UtcNow.Ticks);
+
+        //    var webreq = (HttpWebRequest)HttpWebRequest.Create($"{url}/json/journal?type={Convert.ToInt64("0x4154000000000001", 16)}&from=0&to=0");
+        //    webreq.Method = "POST";
+        //    webreq.ContentType = "application/json;charset=utf-8";
+
+        //    webreq.Headers.Add("cashboxid", cashboxid.ToString());
+        //    webreq.Headers.Add("accesstoken", accesstoken);
+
+
+        //    //byte[] reqecho = Encoding.UTF8.GetBytes(reqjson);
+        //    //webreq.ContentLength = reqecho.Length;
+        //    //using (var reqStream = webreq.GetRequestStream())
+        //    //{
+        //    //    reqStream.Write(reqecho, 0, reqecho.Length);
+        //    //}
+
+        //    var webresp = (HttpWebResponse)webreq.GetResponse();
+        //    if (webresp.StatusCode == HttpStatusCode.OK)
+        //    {
+        //        using (var respStream=webresp.GetResponseStream())
+        //        {
+        //            Console.WriteLine("{0:G} journal response len {1}", DateTime.Now, respStream.Length);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+        //    }
+        //}
+
+
+        internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m, string cashBoxId = "")
         {
 
             var reqdata = new ReceiptRequest()
             {
-                ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                //                ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                ftCashBoxID = cashBoxId,
                 cbTerminalID = "1",
                 ftReceiptCase = 0x4154000000000000,
                 cbReceiptReference = n.ToString(),
                 cbReceiptMoment = DateTime.UtcNow,
+
                 cbChargeItems = new ChargeItem[]  {
                     new ChargeItem()
                     {
@@ -278,6 +326,7 @@ namespace csConsoleApplicationREST
 
             return reqdata;
         }
+
 
     }
 }

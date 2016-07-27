@@ -14,20 +14,34 @@ namespace csConsoleApplicationSOAP
         static void Main(string[] args)
         {
 
-            //..\tools\fiskaltrust-net40\test.cmd runs the service 
-            // with id={f9bb4d9f-db98-4c24-a614-87f9d874f0cc} 
-            // listening on http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202
-            // it has to be run from a console started with admin permission
-            // to reset data delete folder %ProgrammData%\fiskaltrust
-
-            string url = "http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
-            //string url = "http://localhost:1200/fiskaltrust/pos";
-            //string url = "http://192.168.0.19:8524/438BE08C-1D87-440D-A4F0-A21A337C5202";
+            //tools\fiskaltrust-net40
+            string url = "http://localhost:1200/0b09d163-82a1-4349-83ed-7081398df504/";
+            string cashBoxId = Guid.Parse("0d1269dc-e2ae-42e3-9c57-b686d7832683").ToString();
+            string accesstoken = "BHanhRLW0WK1jyS00C+tTcJGtBHhziGWHqynd52pExpfi99QFRue+S4D/w8p5jugQr6hwJu31Parqx5256Qv9pw=";
 
 
+            //tools\fiskaltrust-mono
+            //string url = "http://localhost:1201/9e37335f-b036-4ee8-a2aa-83916ab6749e";
+            //string cashBoxId = Guid.Parse("5f4b1438-8aca-4eda-954f-ec450ed17bde").ToString();
+            //string accesstoken = "BEchmMiRzFCG4FLAxv2vQK+otzcnY6iJXTjGf/Ow/muQROkITCht3ctnUF6pDEmR9XCAzn0LQpQmO6qPyQd37OY=";
 
-            var binding = new BasicHttpBinding(BasicHttpSecurityMode.None);
-            binding.MaxReceivedMessageSize = 16 * 1024 * 1024;
+
+            System.ServiceModel.Channels.Binding binding = null;
+
+            if(url.StartsWith("http"))
+            {
+                var b = new BasicHttpBinding(BasicHttpSecurityMode.None);
+                b.MaxReceivedMessageSize = 16 * 1024 * 1024;
+
+                binding = b;
+            }
+            else if(url.StartsWith("net.pipe"))
+            {
+                var b = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+                b.MaxReceivedMessageSize = 16 * 1024 * 1024;
+
+                binding = b;
+            }
 
             var endpoint = new EndpointAddress(url);
 
@@ -45,9 +59,9 @@ namespace csConsoleApplicationSOAP
             Random r = new Random();
 
             // receipts on deactivated queue
-            while(n<5)
+            while (n < 5)
             {
-                var req = UseCase17Request(n, decimal.Round((decimal)(r.NextDouble() * 100), 2), decimal.Round((decimal)(r.NextDouble() * 100), 2));
+                var req = UseCase17Request(n, decimal.Round((decimal)(r.NextDouble() * 100), 2), decimal.Round((decimal)(r.NextDouble() * 100), 2), cashBoxId);
                 var resp = proxy.Sign(req);
 
                 Response(resp);
@@ -56,7 +70,7 @@ namespace csConsoleApplicationSOAP
 
             // start receipt
             {
-                var req = StartRequest(n);
+                var req = StartRequest(n, cashBoxId);
                 var resp = proxy.Sign(req);
 
                 Response(resp);
@@ -65,28 +79,49 @@ namespace csConsoleApplicationSOAP
 
             // receipts on actevated queue
 
-            while(n<35)
+            long max = long.MinValue;
+            long min = long.MaxValue;
+            long sum = 0;
+            while (n < 100)
             {
-                var req = UseCase17Request(n, decimal.Round((decimal)(r.NextDouble() * 100), 2), decimal.Round((decimal)(r.NextDouble() * 100), 2));
+                var sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+                var req = UseCase17Request(n, decimal.Round((decimal)(r.NextDouble() * 100), 2), decimal.Round((decimal)(r.NextDouble() * 100), 2), cashBoxId);
+                var resp = proxy.Sign(req);
+                sw.Stop();
+                sum += sw.ElapsedMilliseconds;
+                if (sw.ElapsedMilliseconds > max) max = sw.ElapsedMilliseconds;
+                if (sw.ElapsedMilliseconds < min) min = sw.ElapsedMilliseconds;
+                Response(resp);
+                n++;
+            }
+
+            Console.WriteLine($"max: {max}, min: {min}, avg: {sum / 100}");
+
+            // zeroreceipt
+            {
+                var req = ZeroReceiptRequest(n, cashBoxId);
                 var resp = proxy.Sign(req);
 
                 Response(resp);
                 n++;
             }
 
+            while (n < 25)
+            {
+                var req = UseCase17Request(n, decimal.Round((decimal)(r.NextDouble() * 100), 2), decimal.Round((decimal)(r.NextDouble() * 100), 2), cashBoxId);
+                var resp = proxy.Sign(req);
+
+                Response(resp);
+                n++;
+            }
 
             var stream = proxy.Journal(0x4154000000000001, 0, DateTime.UtcNow.Ticks);
             var sr = new System.IO.StreamReader(stream);
 
             Console.WriteLine("========== RKSV-DEP ==========");
 
-            //string journal = sr.ReadToEnd();
-            //System.IO.File.WriteAllText($"c:\\temp\\rksv-dep-{DateTime.Now.Ticks}.txt", journal);
-            //Console.WriteLine(journal);
-
             Console.WriteLine(sr.ReadToEnd());
-            
-
 
 
             factory.Close();
@@ -97,16 +132,18 @@ namespace csConsoleApplicationSOAP
 
 
 
-        internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m)
+        internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m, string cashBoxId="")
         {
 
             var reqdata = new ReceiptRequest()
             {
-                ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                //                ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                ftCashBoxID = cashBoxId,
                 cbTerminalID = "1",
                 ftReceiptCase = 0x4154000000000000,
                 cbReceiptReference = n.ToString(),
                 cbReceiptMoment = DateTime.UtcNow,
+                
                 cbChargeItems = new ChargeItem[]  {
                     new ChargeItem()
                     {
@@ -145,16 +182,15 @@ namespace csConsoleApplicationSOAP
         {
             if (data != null)
             {
-                //Console.WriteLine($"========== n: {data.cbReceiptReference} CashBoxIdentificateion:{data.ftCashBoxIdentification} ReceiptIdentification:{data.ftReceiptIdentification} ==========");
                 Console.WriteLine("========== n: {0} CashBoxIdentificateion:{1} ReceiptIdentification:{2} ==========", data.cbReceiptReference, data.ftCashBoxIdentification, data.ftReceiptIdentification);
                 foreach (var item in data.ftSignatures)
                 {
                     if (item.ftSignatureFormat == 0x03)
                     {
                         fiskaltrust.ifPOS.Utilities.QR_TextChars(item.Data, 64, true);
+                        Console.WriteLine(fiskaltrust.ifPOS.Utilities.AT_RKSV_Signature_ToBase32(item.Data));
                     }
 
-                    //Console.WriteLine($"{item.Caption}:{item.Data}");
                     Console.WriteLine("{0}:{1}", item.Caption, item.Data);
 
                 }
@@ -167,11 +203,12 @@ namespace csConsoleApplicationSOAP
 
 
 
-        internal static ReceiptRequest StartRequest(int n)
+        internal static ReceiptRequest StartRequest(int n, string cashBoxId)
         {
             var reqdata = new ReceiptRequest()
             {
-                ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                //ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                ftCashBoxID = cashBoxId,
                 cbTerminalID = "1",
                 ftReceiptCase = 0x4154000000000003,
                 cbReceiptReference = n.ToString(),
@@ -183,14 +220,31 @@ namespace csConsoleApplicationSOAP
             return reqdata;
         }
 
-
-
-
-        internal static ReceiptRequest StopRequest(int n)
+        internal static ReceiptRequest ZeroReceiptRequest(int n, string cashBoxId)
         {
             var reqdata = new ReceiptRequest()
             {
-                ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                //ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                ftCashBoxID = cashBoxId,
+                cbTerminalID = "1",
+                ftReceiptCase = 0x4154000000000002,
+                cbReceiptReference = n.ToString(),
+                cbReceiptMoment = DateTime.UtcNow,
+                cbChargeItems = new ChargeItem[] { },
+                cbPayItems = new PayItem[] { }
+            };
+
+            return reqdata;
+        }
+
+
+
+        internal static ReceiptRequest StopRequest(int n, string cashBoxId)
+        {
+            var reqdata = new ReceiptRequest()
+            {
+                //ftCashBoxID = "f9bb4d9f-db98-4c24-a614-87f9d874f0cc",
+                ftCashBoxID = cashBoxId,
                 cbTerminalID = "1",
                 ftReceiptCase = 0x4154000000000004,
                 cbReceiptReference = n.ToString(),
