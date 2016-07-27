@@ -18,8 +18,12 @@ function test() {
 
     $.ajax({
         url: url,
+        headers:{
+            "cashboxid": "654fd35d-75eb-49e2-90cd-2980c67350cf",
+            "accesstoken": "BIlyGYZPJXOnwx+MyVekpAFXOjpPFim5+U8EHxuKbOcF/CAA6kSNg1Im+mZstNiIuT0F946RbRPRTO+H6Ngq9q8="
+        },
         type: "POST",
-        contentType: "application/json;encoding=utf-8",
+        contentType: "application/json",
         crossDomain: true,
         data: reqdata,
         success: success,
