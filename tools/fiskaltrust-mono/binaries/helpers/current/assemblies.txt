@@ -1,2 +1,0 @@
-fiskaltrust.service.helper.debug.0.7.16150.577-beta\lib\net40\fiskaltrust.service.helper.debug.net40.dll
-fiskaltrust.service.helper.debug.0.7.16150.577-beta\lib\net40\fiskaltrust.service.helper.net40.dll
