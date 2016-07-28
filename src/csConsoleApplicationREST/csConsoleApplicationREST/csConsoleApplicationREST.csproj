@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="fiskaltrust.ifPOS.net40, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\fiskaltrust.interface.0.7.16150.576-dev\lib\net40\fiskaltrust.ifPOS.net40.dll</HintPath>
+      <HintPath>..\..\..\packages\fiskaltrust.interface.0.7.16209.799-rc\lib\net40\fiskaltrust.ifPOS.net40.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

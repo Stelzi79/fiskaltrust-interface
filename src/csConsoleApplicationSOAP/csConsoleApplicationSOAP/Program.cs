@@ -25,22 +25,36 @@ namespace csConsoleApplicationSOAP
             //string cashBoxId = Guid.Parse("5f4b1438-8aca-4eda-954f-ec450ed17bde").ToString();
             //string accesstoken = "BEchmMiRzFCG4FLAxv2vQK+otzcnY6iJXTjGf/Ow/muQROkITCht3ctnUF6pDEmR9XCAzn0LQpQmO6qPyQd37OY=";
 
-
             System.ServiceModel.Channels.Binding binding = null;
 
-            if(url.StartsWith("http"))
+            if(url.StartsWith("http://"))
             {
                 var b = new BasicHttpBinding(BasicHttpSecurityMode.None);
                 b.MaxReceivedMessageSize = 16 * 1024 * 1024;
 
                 binding = b;
             }
-            else if(url.StartsWith("net.pipe"))
+            else if (url.StartsWith("https://"))
+            {
+                var b = new BasicHttpBinding(BasicHttpSecurityMode.Transport);
+                b.MaxReceivedMessageSize = 16 * 1024 * 1024;
+
+                binding = b;
+            }
+            else if (url.StartsWith("net.pipe://"))
             {
                 var b = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
                 b.MaxReceivedMessageSize = 16 * 1024 * 1024;
 
                 binding = b;
+            }
+            else if(url.StartsWith("net.tcp://"))
+            {
+                var b = new NetTcpBinding(SecurityMode.None);
+                b.MaxReceivedMessageSize = 16 * 1024 * 1024;
+
+                binding = b;
+
             }
 
             var endpoint = new EndpointAddress(url);
