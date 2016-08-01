@@ -36,7 +36,7 @@ namespace csConsoleApplicationREST
 
             signXml(url, cashboxid, accesstoken);
 
-            journalJson(url, cashboxid, accesstoken);
+            //journalJson(url, cashboxid, accesstoken);
 
             Console.ReadKey();
         }
