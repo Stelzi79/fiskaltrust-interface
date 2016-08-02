@@ -1,4 +1,4 @@
-# fiskaltrust.Interface
+﻿# fiskaltrust.Interface
 [see english readme](#fiskaltrust-interface-en)
 
 Beispiel, wie man das fiskaltrust.Interface nutzt.
@@ -13,7 +13,7 @@ Um Ihren Entwicklung zu erleichtern, stellen wir auch ein nuget-package [https:/
 ## Verbindung mit der fiskaltrust.securitymechanism (Sicherheitseinrichtung)
 Als Basis-Technologie zur Kommunikation wird WCF verwendet. Zur lokalen, internen Kommunikation zwischen queues, signature creation units (Signaturerstellungseinheiten) und benutzerspezifischen Modulen (Sonstigen Modulen) wird am besten das net.pipe protocoll verwendet. Zur Kommunikation zwischen verschiedenen Plattformen wird am besten basic http verwendet.
 ### SOAP
-SOAP wird mit dem http-Protokoll der wcf-Kommunikation ausgeliefert. Um die WSDL-Datei zu erhalten, kann man diesen Debug-Build verwenden und auf die konfigurierte http-Adresse gehen. Hierbei wird [http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202] verwendet. Eine weitere Option besteht darin, die Datei aus dem Ordner tools/wsdl zu verwenden.
+SOAP wird mit dem http-Protokoll der wcf-Kommunikation ausgeliefert. Um die WSDL-Datei zu erhalten, kann man diesen Debug-Build verwenden und auf die konfigurierte http-Adresse gehen. Hierbei wird [http://localhost:1200/0b09d163-82a1-4349-83ed-7081398df504] verwendet. Eine weitere Option besteht darin, die Datei aus dem Ordner tools/wsdl zu verwenden.
 
 ### REST
 REST steht sowohl in XML als auch in JSON zur Verfügung. Es stehen benutzerspezifische Module zur Verfügung, die geladen werden können, um die Basis-Services möglichest schlank zu halten.
@@ -36,7 +36,7 @@ Typisch ausführbare Befehle:
 ```sudo apt-get install sqlite```    
 ```sudo apt-get install pcsclite```    
 ```cd fiskaltrust-mono```    
-```sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
+```sudo mono fiskaltrust.mono.exe -caschboxid=0d1269dc-e2ae-42e3-9c57-b686d7832683 -useoffline=true -test```
 
 ## Hosting unter Windows
 Der launcher (fiskaltrust.exe) ist als Windows-Dienst für die Produktionsumgebung entwickelt. Es wird auch die Möglichkeit einer automatisierte Installation durch Befehlszeilenparameter unterstützt. Details sind in der Entwickler-Dokumentation zu finden.
@@ -48,7 +48,7 @@ Hierfür ist nur .net4 Voraussetzung.
 Typisch ausführbare Befehle:
 (command-line mit Administrationsrecht starten)    
 ```cd fiskaltrust-net40```    
-```fiskaltrust -cashboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -test```
+```fiskaltrust -cashboxid=0d1269dc-e2ae-42e3-9c57-b686d7832683 -test```
 
 ## Cloud-basiert
 Die gleiche Schnittstellen- und service-Definitionen werden als Cloud-Service unterstützt. Das als lokales Service entwickelte SOAP- und REST-Interface kann nahtlos in einen Cloud-Service gewechselt werden.
@@ -81,7 +81,7 @@ To speed up development we also deliver a nuget-package [https://nuget.org] with
 ## connecting to fiskaltrust.securitymechanism
 As a base technology in communication wcf is used. For local internal communication between queues, signature creation units and custom modules the net.pipe protocoll is the best choice. For multi platform communication the basic http may be the best choice.
 ### SOAP
-SOAP comes with the http protocol from wcf communication. To get the wsdl file you can use these debug-build and goto the http-address configured, here [http://localhost:8524/438BE08C-1D87-440D-A4F0-A21A337C5202] is used. Another option is to use the file from the folder tools/wsdl.
+SOAP comes with the http protocol from wcf communication. To get the wsdl file you can use these debug-build and goto the http-address configured, here [http://localhost:1200/0b09d163-82a1-4349-83ed-7081398df504] is used. Another option is to use the file from the folder tools/wsdl.
 ### REST
 REST is available in both, in xml and json. there are helpers which can be loaded to keep the base service lightweight.
 ### native TCP-IP and serial rs232/485/422
@@ -105,7 +105,7 @@ Typical commands to run:
 ```sudo apt-get install sqlite```    
 ```sudo apt-get install pcsclite```    
 ```cd fiskaltrust-mono```    
-```sudo mono fiskaltrust.mono.exe -caschboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -useoffline=true -test```
+```sudo mono fiskaltrust.mono.exe -caschboxid=0d1269dc-e2ae-42e3-9c57-b686d7832683 -useoffline=true -test```
 
 ## hosting on windows
 The launcher (fiskaltrust.exe) is constructed to act as an windows service in production environment. For this also automated installation is supported by command-line parameter. ((You can find details in the developer documentation.)
@@ -117,7 +117,7 @@ Only .net4 is prerequisites.
 Typical commands to run:    
 (open command-line with administration permission)    
 ```cd fiskaltrust-net40```    
-```fiskaltrust -cashboxid=f9bb4d9f-db98-4c24-a614-87f9d874f0cc -test```
+```fiskaltrust -cashboxid=0d1269dc-e2ae-42e3-9c57-b686d7832683 -test```
 
 ## cloud based
 The same interface and service definition is served as an cloud service. You can use SOAP and REST interface designed for local service to seamless switch over to the cloud service.
