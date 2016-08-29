@@ -36,7 +36,9 @@ namespace csConsoleApplicationREST
 
             signXml(url, cashboxid, accesstoken);
 
-            //journalJson(url, cashboxid, accesstoken);
+            //signJsonStartRequest(url, cashboxid, accesstoken); //Send Start receipt to activate Queue for the first time
+            
+            journalJson(url, cashboxid, accesstoken);
 
             Console.ReadKey();
         }
@@ -245,40 +247,74 @@ namespace csConsoleApplicationREST
         }
 
 
-        //static void journalJson(string url, Guid cashboxid=default(Guid), string accesstoken="00000000")
-        //{
-        //    Console.WriteLine("{0:G} Journal request", DateTime.Now);
+        static void signJsonStartRequest(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
+        {
+            var reqdata = StartRequest(2,cashboxid.ToString());
 
-        //    //var stream = proxy.Journal(0x4154000000000001, 0, DateTime.UtcNow.Ticks);
+            var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
+            var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
+            Console.WriteLine("{0:G} Sign request {1}", DateTime.Now, reqjson);
 
-        //    var webreq = (HttpWebRequest)HttpWebRequest.Create($"{url}/json/journal?type={Convert.ToInt64("0x4154000000000001", 16)}&from=0&to=0");
-        //    webreq.Method = "POST";
-        //    webreq.ContentType = "application/json;charset=utf-8";
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/json/sign");
+            webreq.Method = "POST";
+            webreq.ContentType = "application/json;charset=utf-8";
 
-        //    webreq.Headers.Add("cashboxid", cashboxid.ToString());
-        //    webreq.Headers.Add("accesstoken", accesstoken);
+            webreq.Headers.Add("cashboxid", cashboxid.ToString());
+            webreq.Headers.Add("accesstoken", accesstoken);
 
 
-        //    //byte[] reqecho = Encoding.UTF8.GetBytes(reqjson);
-        //    //webreq.ContentLength = reqecho.Length;
-        //    //using (var reqStream = webreq.GetRequestStream())
-        //    //{
-        //    //    reqStream.Write(reqecho, 0, reqecho.Length);
-        //    //}
+            byte[] reqecho = Encoding.UTF8.GetBytes(reqjson);
+            webreq.ContentLength = reqecho.Length;
+            using (var reqStream = webreq.GetRequestStream())
+            {
+                reqStream.Write(reqecho, 0, reqecho.Length);
+            }
 
-        //    var webresp = (HttpWebResponse)webreq.GetResponse();
-        //    if (webresp.StatusCode == HttpStatusCode.OK)
-        //    {
-        //        using (var respStream=webresp.GetResponseStream())
-        //        {
-        //            Console.WriteLine("{0:G} journal response len {1}", DateTime.Now, respStream.Length);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
-        //    }
-        //}
+            var webresp = (HttpWebResponse)webreq.GetResponse();
+            if (webresp.StatusCode == HttpStatusCode.OK)
+            {
+                using (var respReader = new System.IO.StreamReader(webresp.GetResponseStream(), Encoding.UTF8))
+                {
+                    var respdata = JsonConvert.DeserializeObject<fiskaltrust.ifPOS.v0.ReceiptResponse>(respReader.ReadToEnd(), jsonSettings);
+                    var respjson = JsonConvert.SerializeObject(respdata, jsonSettings);
+
+                    Console.WriteLine("{0:G} Sign response {1}", DateTime.Now, respjson);
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+            }
+
+        }
+
+        static void journalJson(string url, Guid cashboxid=default(Guid), string accesstoken="00000000")
+        {
+            Console.WriteLine("{0:G} Journal request", DateTime.Now);
+
+            var webreq = (HttpWebRequest)HttpWebRequest.Create($"{url}/json/journal?type={Convert.ToInt64("0x4154000000000001", 16)}&from=0&to=0");
+            webreq.Method = "POST";
+            webreq.ContentType = "application/json;charset=utf-8";
+            webreq.ContentLength = 0;
+
+            webreq.Headers.Add("cashboxid", cashboxid.ToString());
+            webreq.Headers.Add("accesstoken", accesstoken);
+
+            var webresp = (HttpWebResponse)webreq.GetResponse();
+            if (webresp.StatusCode == HttpStatusCode.OK)
+            {
+                using (var respStream=webresp.GetResponseStream())
+                {
+                    System.IO.StreamReader reader = new System.IO.StreamReader(respStream);
+                    string text = reader.ReadToEnd();
+                    Console.WriteLine("{0:G} journal response len {1}", DateTime.Now, text.Length  ); // to show journal text use text instead of text.length
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+            }
+        }
 
 
         internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m, string cashBoxId = "")
@@ -327,6 +363,21 @@ namespace csConsoleApplicationREST
             return reqdata;
         }
 
+        internal static ReceiptRequest StartRequest(int n, string cashBoxId)
+        {
+            var reqdata = new ReceiptRequest()
+            {
+                ftCashBoxID = cashBoxId,
+                cbTerminalID = "1",
+                ftReceiptCase = 0x4154000000000003,
+                cbReceiptReference = n.ToString(),
+                cbReceiptMoment = DateTime.UtcNow,
+                cbChargeItems = new ChargeItem[] { },
+                cbPayItems = new PayItem[] { }
+            };
+
+            return reqdata;
+        }
 
     }
 }
