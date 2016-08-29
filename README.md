@@ -58,6 +58,9 @@ Der Launcher verwendet die Datei configuration.json von seinem Ausführungsverze
 
 Um den Dienst vollständig zurückzusetzen, kann das komplette Verzeichnis gelöscht werden.
 
+## Kartentests
+Im Verzeichnis Tools\cardtest ist ein Werkzeug zum Testen von Karten und Readern, online und offline. Dort befindet sich auch eine README.md mit einer Beschreibung.
+
 ## Feedback und Bugs
 fiskaltrust wird ständig weiterentwickelt. Nutzen Sie bitte die Möglichkeit, durch Github-Fragen Ihre Wünsche und unsere Fehler zu diskutieren.
 
@@ -126,6 +129,9 @@ The same interface and service definition is served as an cloud service. You can
 The launcher uses the file configuration.json from its execution directory to make up its basic configuration. In production use this is done in the fiskaltrust-portal and the launcher tries to read it from the upload-server, related to cashboxid and accesstoken. For offline use this configuration is stored in the execution directory. Once the configuration is readed from the execution directory or from upload-server, it is stored localy in the service-folder. The default service-foler ist in windows %ProgramData%\fiskaltrust or in linux /usr/shared/fiskaltrust.
 
 In this folder also the database file and the executeables are stored, to completly reset the service delete tihs directory.
+
+## card testing
+In the tools\cardtest folder is a tool to test card and readers online and offline. See the README.md included there.
 
 ## feedback and bugs
 fiskaltrust is under permanent development, so feel free to discuss here your wishes and our bugs with the github-issues feature.
