@@ -61,6 +61,9 @@ Um den Dienst vollständig zurückzusetzen, kann das komplette Verzeichnis gelö
 ## Kartentests
 Im Verzeichnis Tools\cardtest ist ein Werkzeug zum Testen von Karten und Readern, online und offline. Dort befindet sich auch eine README.md mit einer Beschreibung.
 
+## Häufiger Fehler
+Aus Sicherheitsgründen reagiert die fiskaltrust.Sicherheitseinrichtung nur mit einer gültigen Antwort, wenn eine korrekte CashboxID in den Daten übergeben wurde. Wenn eine unbekannte übergeben wird, so kommt keine Antwort zurück.
+
 ## Feedback und Bugs
 fiskaltrust wird ständig weiterentwickelt. Nutzen Sie bitte die Möglichkeit, durch Github-Fragen Ihre Wünsche und unsere Fehler zu diskutieren.
 
@@ -132,6 +135,9 @@ In this folder also the database file and the executeables are stored, to comple
 
 ## card testing
 In the tools\cardtest folder is a tool to test card and readers online and offline. See the README.md included there.
+
+## common error
+Due to security reasons, the fiskaltrust.securitymechanism does not return anything (Null) if the provided CashboxID is wrong. 
 
 ## feedback and bugs
 fiskaltrust is under permanent development, so feel free to discuss here your wishes and our bugs with the github-issues feature.
