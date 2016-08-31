@@ -37,7 +37,11 @@ namespace csConsoleApplicationREST
             signXml(url, cashboxid, accesstoken);
 
             //signJsonStartRequest(url, cashboxid, accesstoken); //Send Start receipt to activate Queue for the first time
-            
+
+            signJsonZeroReceipt(url, cashboxid, accesstoken); //Send Zero receipt 
+
+            signJson(url, cashboxid, accesstoken);
+
             journalJson(url, cashboxid, accesstoken);
 
             Console.ReadKey();
@@ -46,7 +50,7 @@ namespace csConsoleApplicationREST
 
 
 
-        static void echoJson(string url, Guid cashboxid= default(Guid), string accesstoken=null)
+        static void echoJson(string url, Guid cashboxid = default(Guid), string accesstoken = null)
         {
 
             var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/json/echo");
@@ -54,7 +58,7 @@ namespace csConsoleApplicationREST
             webreq.ContentType = "application/json;charset=utf-8";
 
             webreq.Headers.Add("cashboxid", cashboxid.ToString());
-            webreq.Headers.Add("accesstoken",accesstoken);
+            webreq.Headers.Add("accesstoken", accesstoken);
 
             byte[] reqecho = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject("Hello World"));
             webreq.ContentLength = reqecho.Length;
@@ -155,12 +159,12 @@ namespace csConsoleApplicationREST
                 Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
             }
             */
-            
+
         }
 
         static void signXml(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
         {
-            var reqdata = UseCase17Request(1,5,5,cashboxid.ToString());
+            var reqdata = UseCase17Request(1, 5, 5, cashboxid.ToString());
 
             var ms = new System.IO.MemoryStream();
             var serializer = new System.Runtime.Serialization.DataContractSerializer(typeof(fiskaltrust.ifPOS.v0.ReceiptRequest));
@@ -207,7 +211,7 @@ namespace csConsoleApplicationREST
 
         static void signJson(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
         {
-            var reqdata = UseCase17Request(1,5,5,cashboxid.ToString());
+            var reqdata = UseCase17Request(1, 5, 5, cashboxid.ToString());
 
             var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
             var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
@@ -249,7 +253,7 @@ namespace csConsoleApplicationREST
 
         static void signJsonStartRequest(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
         {
-            var reqdata = StartRequest(2,cashboxid.ToString());
+            var reqdata = StartRequest(2, cashboxid.ToString());
 
             var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
             var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
@@ -288,7 +292,49 @@ namespace csConsoleApplicationREST
 
         }
 
-        static void journalJson(string url, Guid cashboxid=default(Guid), string accesstoken="00000000")
+        static void signJsonZeroReceipt(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
+        {
+            var reqdata = ZeroReceiptRequest(2, cashboxid.ToString());
+
+            var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
+            var reqjson = JsonConvert.SerializeObject(reqdata, jsonSettings);
+            Console.WriteLine("{0:G} Sign request zero receipt {1}", DateTime.Now, reqjson);
+
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(url + "/json/sign");
+            webreq.Method = "POST";
+            webreq.ContentType = "application/json;charset=utf-8";
+
+            webreq.Headers.Add("cashboxid", cashboxid.ToString());
+            webreq.Headers.Add("accesstoken", accesstoken);
+
+
+            byte[] reqecho = Encoding.UTF8.GetBytes(reqjson);
+            webreq.ContentLength = reqecho.Length;
+            using (var reqStream = webreq.GetRequestStream())
+            {
+                reqStream.Write(reqecho, 0, reqecho.Length);
+            }
+
+            var webresp = (HttpWebResponse)webreq.GetResponse();
+            if (webresp.StatusCode == HttpStatusCode.OK)
+            {
+                using (var respReader = new System.IO.StreamReader(webresp.GetResponseStream(), Encoding.UTF8))
+                {
+                    var respdata = JsonConvert.DeserializeObject<fiskaltrust.ifPOS.v0.ReceiptResponse>(respReader.ReadToEnd(), jsonSettings);
+                    var respjson = JsonConvert.SerializeObject(respdata, jsonSettings);
+
+                    Console.WriteLine("{0:G} Sign response zero receipt {1}", DateTime.Now, respjson);
+                }
+            }
+            else
+            {
+                Console.WriteLine("{0:G} {1} {2}", DateTime.Now, webresp.StatusCode, webresp.StatusDescription);
+            }
+
+        }
+
+
+        static void journalJson(string url, Guid cashboxid = default(Guid), string accesstoken = "00000000")
         {
             Console.WriteLine("{0:G} Journal request", DateTime.Now);
 
@@ -303,11 +349,11 @@ namespace csConsoleApplicationREST
             var webresp = (HttpWebResponse)webreq.GetResponse();
             if (webresp.StatusCode == HttpStatusCode.OK)
             {
-                using (var respStream=webresp.GetResponseStream())
+                using (var respStream = webresp.GetResponseStream())
                 {
                     System.IO.StreamReader reader = new System.IO.StreamReader(respStream);
                     string text = reader.ReadToEnd();
-                    Console.WriteLine("{0:G} journal response len {1}", DateTime.Now, text.Length  ); // to show journal text use text instead of text.length
+                    Console.WriteLine("{0:G} journal response len {1}", DateTime.Now, text.Length); // to show journal text use text instead of text.length
                 }
             }
             else
@@ -379,5 +425,20 @@ namespace csConsoleApplicationREST
             return reqdata;
         }
 
+        internal static ReceiptRequest ZeroReceiptRequest(int n, string cashBoxId)
+        {
+            var reqdata = new ReceiptRequest()
+            {
+                ftCashBoxID = cashBoxId,
+                cbTerminalID = "1",
+                ftReceiptCase = 0x4154000000000002,
+                cbReceiptReference = n.ToString(),
+                cbReceiptMoment = DateTime.UtcNow,
+                cbChargeItems = new ChargeItem[] { },
+                cbPayItems = new PayItem[] { }
+            };
+
+            return reqdata;
+        }
     }
 }
