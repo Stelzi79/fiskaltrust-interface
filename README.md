@@ -5,6 +5,9 @@ Beispiel, wie man das fiskaltrust.Interface nutzt.
 
 fiskaltrust bietet eine gesetzeskonforme Sicherheitseinrichtung für Registrierkassen.
 
+##Neuerungen 14.11.2016
+Ab sofort gibt es ein neues Interface (unseren Release Candidate), Version 1.0.nnn. Dieses Interface ist im Nuget Package fiskaltrust.interface und fiskaltrust.interface.utlities Version 1.0.16298.1022-rc enthalten. Ebenfalls geändert hat sich dadurch die Wsdl Datei hier in den Tools.
+
 ## Dokumentation
 Die detaillierte Dokumentation ist auf dem fiskaltrust.Portal [https://portal.fiskaltrust.at] nach der Registrierung und Aktivierung der Rolle als Registrierkassenhersteller (in der Übersicht) verfügbar.
 
@@ -78,6 +81,9 @@ Bauernmarkt 24, 1010 Wien
 Examples how to use fiskaltrust.interface.
 
 fiskaltrust offers a legal compliant cash register security mechanism.
+
+##News 14.11.2016
+Per now we published aour release candidate interface, version 1.0.nnn. This interface is included in  This interface is included in the Nuget Package fiskaltrust.interface and fiskaltrust.interface.utlities version 1.0.16298.1022-rc. The Wsdl description file here at Github in the tools directory changed as well.
 
 ## documentation
 The detailed documentation is available from fiskaltrust-portal [https://portal.fiskaltrust.at] when after you activate the role possystem-creator (Registrierkassenhersteller).

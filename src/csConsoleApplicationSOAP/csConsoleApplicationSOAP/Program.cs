@@ -15,7 +15,7 @@ namespace csConsoleApplicationSOAP
         {
 
             //tools\fiskaltrust-net40
-            string url = "http://localhost:1200/0b09d163-82a1-4349-83ed-7081398df504/";
+            string url = "http://localhost:1200/fiskaltrust/";
             string cashBoxId = Guid.Parse("0d1269dc-e2ae-42e3-9c57-b686d7832683").ToString();
             string accesstoken = "BHanhRLW0WK1jyS00C+tTcJGtBHhziGWHqynd52pExpfi99QFRue+S4D/w8p5jugQr6hwJu31Parqx5256Qv9pw=";
 
@@ -27,7 +27,7 @@ namespace csConsoleApplicationSOAP
 
             System.ServiceModel.Channels.Binding binding = null;
 
-            if(url.StartsWith("http://"))
+            if (url.StartsWith("http://"))
             {
                 var b = new BasicHttpBinding(BasicHttpSecurityMode.None);
                 b.MaxReceivedMessageSize = 16 * 1024 * 1024;
@@ -48,7 +48,7 @@ namespace csConsoleApplicationSOAP
 
                 binding = b;
             }
-            else if(url.StartsWith("net.tcp://"))
+            else if (url.StartsWith("net.tcp://"))
             {
                 var b = new NetTcpBinding(SecurityMode.None);
                 b.MaxReceivedMessageSize = 16 * 1024 * 1024;
@@ -110,7 +110,7 @@ namespace csConsoleApplicationSOAP
                 n++;
             }
 
-            Console.WriteLine($"max: {max}, min: {min}, avg: {sum / 100}");
+            Console.WriteLine(String.Format("max: {0}, min: {1}, avg: {2}", max, min, sum / 100));
 
             // zeroreceipt
             {
@@ -146,7 +146,7 @@ namespace csConsoleApplicationSOAP
 
 
 
-        internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m, string cashBoxId="")
+        internal static ReceiptRequest UseCase17Request(int n, decimal amount1 = 4.8m, decimal amount2 = 3.3m, string cashBoxId = "")
         {
 
             var reqdata = new ReceiptRequest()
@@ -157,7 +157,7 @@ namespace csConsoleApplicationSOAP
                 ftReceiptCase = 0x4154000000000000,
                 cbReceiptReference = n.ToString(),
                 cbReceiptMoment = DateTime.UtcNow,
-                
+
                 cbChargeItems = new ChargeItem[]  {
                     new ChargeItem()
                     {

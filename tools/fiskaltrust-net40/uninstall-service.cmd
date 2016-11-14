@@ -1,1 +1,0 @@
-fiskaltrust -cashboxid=0d1269dc-e2ae-42e3-9c57-b686d7832683  -u -servicename=fiskaltrust-0d1269dc-e2ae-42e3-9c57-b686d7832683 

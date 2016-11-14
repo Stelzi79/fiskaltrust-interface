@@ -32,12 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="fiskaltrust.ifPOS.net40, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\fiskaltrust.interface.0.7.16209.799-rc\lib\net40\fiskaltrust.ifPOS.net40.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.7.4137.9688, Culture=neutral, PublicKeyToken=a4292a325f69b123, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\BouncyCastle.1.7.0\lib\Net40-Client\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="fiskaltrust.ifPOS.Utilities.net40, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\fiskaltrust.interface.utilities.0.7.16209.799-rc\lib\net40\fiskaltrust.ifPOS.Utilities.net40.dll</HintPath>
+    <Reference Include="fiskaltrust.ifPOS.net40, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\fiskaltrust.interface.1.0.16298.1022-rc\lib\net40\fiskaltrust.ifPOS.net40.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="fiskaltrust.ifPOS.Utilities.net40, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\fiskaltrust.interface.utilities.1.0.16298.1022-rc\lib\net40\fiskaltrust.ifPOS.Utilities.net40.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

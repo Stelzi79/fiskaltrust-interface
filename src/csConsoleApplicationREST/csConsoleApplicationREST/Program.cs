@@ -338,7 +338,7 @@ namespace csConsoleApplicationREST
         {
             Console.WriteLine("{0:G} Journal request", DateTime.Now);
 
-            var webreq = (HttpWebRequest)HttpWebRequest.Create($"{url}/json/journal?type={Convert.ToInt64("0x4154000000000001", 16)}&from=0&to=0");
+            var webreq = (HttpWebRequest)HttpWebRequest.Create(String.Format("{0}/json/journal?type={1}&from=0&to=0", url,Convert.ToInt64("0x4154000000000001", 16)));
             webreq.Method = "POST";
             webreq.ContentType = "application/json;charset=utf-8";
             webreq.ContentLength = 0;
