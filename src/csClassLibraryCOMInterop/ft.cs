@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.ServiceModel;
 using Newtonsoft.Json;
+using System.IO;
+using System.Globalization;
 
 namespace csClassLibraryCOMInterop
 {
@@ -22,7 +24,7 @@ namespace csClassLibraryCOMInterop
 
         public ft()
         {
-            serviceUrl = "http://localhost:1201/fiskaltrust/POS";
+            //serviceUrl = "http://localhost:1201/fiskaltrust/POS";
         }
 
         private fiskaltrust.ifPOS.v0.IPOS proxy = null;
@@ -73,7 +75,7 @@ namespace csClassLibraryCOMInterop
             try
             {
                 var jsonSettings = new JsonSerializerSettings() { DateFormatHandling = DateFormatHandling.MicrosoftDateFormat };
-                var req = JsonConvert.DeserializeObject<fiskaltrust.ifPOS.v0.ReceiptRequest>(request,jsonSettings);
+                var req = JsonConvert.DeserializeObject<fiskaltrust.ifPOS.v0.ReceiptRequest>(request, jsonSettings);
                 var resp = proxy.Sign(req);
                 return JsonConvert.SerializeObject(resp, jsonSettings);
             }
@@ -85,7 +87,7 @@ namespace csClassLibraryCOMInterop
 
         public Signer signer
         {
-            get;private set;
+            get; private set;
         }
 
         public void signerInit()
@@ -95,7 +97,7 @@ namespace csClassLibraryCOMInterop
         }
 
 
-        [ComVisible(true),ClassInterface(ClassInterfaceType.AutoDual)]
+        [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual)]
         [Guid("8F3E0628-3A7A-4E06-BD32-8F8633F77D13")]
         public class Signer
         {
@@ -241,7 +243,7 @@ namespace csClassLibraryCOMInterop
                 item.ftChargeItemCase = ftChargeItemCase;
                 _requestChargeItems.Add(item.ftChageItem());
             }
-            
+
             public void RemoveChargeItem(int index)
             {
                 _requestChargeItems.Remove(_requestChargeItems[index]);
@@ -251,14 +253,6 @@ namespace csClassLibraryCOMInterop
             {
                 _requestChargeItems.Clear();
             }
-
-            //public ChargeItem[] ChargeItems
-            //{
-            //    get
-            //    {
-            //        return _requestChargeItems.Select(c => new ChargeItem(c)).ToArray();
-            //    }
-            //}
 
             public int ChargeItemsLen
             {
@@ -304,14 +298,6 @@ namespace csClassLibraryCOMInterop
                 _requestPayItems.Clear();
             }
 
-            //public PayItem[] PayItems
-            //{
-            //    get
-            //    {
-            //        return _requestPayItems.Select(p => new PayItem(p)).ToArray();
-            //    }
-            //}
-
             public int PayItemsLen
             {
                 get
@@ -351,7 +337,7 @@ namespace csClassLibraryCOMInterop
                 _item = item;
             }
 
-            
+
             public double Quantity
             {
                 get
@@ -452,7 +438,7 @@ namespace csClassLibraryCOMInterop
 
         }
 
-        [ComVisible(true),ClassInterface(ClassInterfaceType.AutoDual)]
+        [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual)]
         [Guid("CBBF5596-1BB3-4D30-BD1F-3F643B2DF5D3")]
         public class PayItem
         {
@@ -542,7 +528,7 @@ namespace csClassLibraryCOMInterop
             }
         }
 
-        [ComVisible(true),ClassInterface(ClassInterfaceType.AutoDual)]
+        [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual)]
         [Guid("5D5B7FD2-3B2B-41B3-9B0C-263D495F48C3")]
         public class SignaturItem
         {
@@ -626,7 +612,7 @@ namespace csClassLibraryCOMInterop
             }
         }
 
-        [ComVisible(true),ClassInterface(ClassInterfaceType.AutoDual)]
+        [ComVisible(true), ClassInterface(ClassInterfaceType.AutoDual)]
         [Guid("CCF06E1B-5A11-422B-A4C3-DA323D62F9FD")]
         public class SignResponse
         {
@@ -669,7 +655,7 @@ namespace csClassLibraryCOMInterop
             {
                 get
                 {
-                    return _response.ftReceiptID;
+                    return "1";//_response.ftReceiptID;
                 }
             }
 
@@ -747,7 +733,7 @@ namespace csClassLibraryCOMInterop
                 return new SignaturItem(_response.ftSignatures[index]);
             }
 
-           public string[] ftReceiptFooter
+            public string[] ftReceiptFooter
             {
                 get
                 {
@@ -771,6 +757,31 @@ namespace csClassLibraryCOMInterop
                 }
             }
 
+        }
+
+        public string journal(string ftJournalType, string from, string to)
+        {
+            if (!Connected) throw new Exception("Not Connected");
+            try
+            {
+                long lftJournalType, lfrom, lto;
+                if (Int64.TryParse(ftJournalType, NumberStyles.AllowHexSpecifier | NumberStyles.HexNumber, CultureInfo.InvariantCulture, out lftJournalType))
+                {
+                    if (!Int64.TryParse(from, NumberStyles.AllowHexSpecifier | NumberStyles.HexNumber, CultureInfo.InvariantCulture, out lfrom)) { lfrom = 0; }
+                    if (!Int64.TryParse(to, NumberStyles.AllowHexSpecifier | NumberStyles.HexNumber, CultureInfo.InvariantCulture, out lto)) { lto = 0; }
+                    StreamReader reader = new StreamReader(proxy.Journal(lftJournalType, lfrom , lto));
+                    string text = reader.ReadToEnd();
+                    return text;
+                }
+                else
+                {
+                    return "";
+                }
+            }
+            catch (Exception x)
+            {
+                return x.Message;
+            }
         }
 
         public string echo(string message)
