@@ -32,21 +32,6 @@ namespace csConsoleApplicationSOAP
                 throw new ArgumentException("cashboxid is not a guid!");
             }
                 
-            //Console.Write("accesstoken:");
-            //accesstoken = Console.ReadLine();
-
-
-            //tools\fiskaltrust-net40
-            //string url = "http://localhost:1200/fiskaltrust/";
-            //string cashBoxId = Guid.Parse("0d1269dc-e2ae-42e3-9c57-b686d7832683").ToString();
-            //string accesstoken = "BHanhRLW0WK1jyS00C+tTcJGtBHhziGWHqynd52pExpfi99QFRue+S4D/w8p5jugQr6hwJu31Parqx5256Qv9pw=";
-
-
-            //tools\fiskaltrust-mono
-            //string url = "http://localhost:1201/9e37335f-b036-4ee8-a2aa-83916ab6749e";
-            //string cashBoxId = Guid.Parse("5f4b1438-8aca-4eda-954f-ec450ed17bde").ToString();
-            //string accesstoken = "BEchmMiRzFCG4FLAxv2vQK+otzcnY6iJXTjGf/Ow/muQROkITCht3ctnUF6pDEmR9XCAzn0LQpQmO6qPyQd37OY=";
-
             System.ServiceModel.Channels.Binding binding = null;
 
             if (url.StartsWith("http://"))
@@ -192,6 +177,19 @@ namespace csConsoleApplicationSOAP
                 Response(resp);
 
             }
+            else if (inputInt == 7)
+            {
+                var req = UseCase17Request(++i, decimal.Round((decimal)(r.NextDouble() * 100), 2), decimal.Round((decimal)(r.NextDouble() * 100), 2), cashBoxId);
+
+                req.ftReceiptCase |= 0x010000;
+
+
+                Console.WriteLine("{0:G} Barumsatz request: {1}", DateTime.Now, JsonConvert.SerializeObject(req));
+
+                var resp = proxy.Sign(req);
+
+                Response(resp);
+            }
             else if (inputInt >= 10 && inputInt < 1000)
             {
 
@@ -201,7 +199,7 @@ namespace csConsoleApplicationSOAP
                 long min = long.MaxValue;
                 long sum = 0;
                 int n = 0;
-                while (n < inputInt)
+                while (n++ < inputInt)
                 {
                     var sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
@@ -291,7 +289,7 @@ namespace csConsoleApplicationSOAP
 
                     Console.WriteLine("{0}:{1}", item.Caption, item.Data);
 
-                    if(item.ftSignatureType== 0x4154000000000001)
+                    if(item.ftSignatureType== 0x4154000000000001 && item.ftSignatureFormat==3)
                     {
                         Console.WriteLine(fiskaltrust.ifPOS.Utilities.AT_RKSV_Signature_ToBase32(item.Data));
                         //Console.WriteLine(fiskaltrust.ifPOS.Utilities.AT_RKSV_Signature_ToLink(item.Data));
