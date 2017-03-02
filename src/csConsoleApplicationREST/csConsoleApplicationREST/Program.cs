@@ -23,6 +23,8 @@ namespace csConsoleApplicationREST
         static void Main(string[] args)
         {
 
+            ServicePointManager.DefaultConnectionLimit = 65535;
+
             Console.Write("fiskaltrust-service-url (https://signaturcloud-sandbox.fiskaltrust.at/):");
             url = Console.ReadLine();
             if(url.Length==0)
@@ -77,6 +79,7 @@ namespace csConsoleApplicationREST
             Console.WriteLine("5: Monats-Beleg (0x4154000000000005)");
             Console.WriteLine("6: Jahres-Beleg (0x4154000000000006)");
 
+            Console.WriteLine("9: RKSV-DEP export");
             Console.WriteLine("10: Anzahl der zu sendenden Barumsatzbelege (max 999)");
 
             Console.WriteLine("exit: Program beenden");
@@ -202,6 +205,32 @@ namespace csConsoleApplicationREST
                     var resp = signXml(req, url, cashboxid, accesstoken);
                     Response(resp);
                 }
+            }
+            else if(inputInt==9)
+            {
+
+                string filename = $"c:\\temp\\{cashboxid}_{DateTime.UtcNow.Ticks}.json";
+
+                Console.Write("{0:G} RKSV-DEP export ({1})", DateTime.Now, filename);
+
+                string inputFilename = Console.ReadLine();
+                if(!string.IsNullOrWhiteSpace(inputFilename))
+                {
+                    filename = inputFilename;
+                }
+
+                using (var file=System.IO.File.Open(filename, System.IO.FileMode.Create))
+                {
+                    using (var journal= journalJson(0x4154000000000001, 0,0 /*(new DateTime(2999,12,31)).Ticks*/, url, cashboxid, accesstoken))
+                    {
+                        journal.Position = 0;
+                        journal.CopyTo(file);
+                    }
+
+                    Console.WriteLine("{0:G} RKSV-DEP exportiert nach {1} ({2:0.00}Mb)", DateTime.Now, filename,((decimal)file.Length)/1024m/1024m);
+                }
+
+                
             }
             else if (inputInt >= 10 && inputInt < 1000)
             {

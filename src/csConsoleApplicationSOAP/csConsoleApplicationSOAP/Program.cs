@@ -6,6 +6,7 @@ using System.Text;
 
 using fiskaltrust.ifPOS.v0;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace csConsoleApplicationSOAP
 {
@@ -19,6 +20,8 @@ namespace csConsoleApplicationSOAP
 
         static void Main(string[] args)
         {
+
+            ServicePointManager.DefaultConnectionLimit = 65535;
 
             Console.Write("fiskaltrust-service-url:");
             url = Console.ReadLine();
@@ -93,6 +96,7 @@ namespace csConsoleApplicationSOAP
             Console.WriteLine("5: Monats-Beleg (0x4154000000000005)");
             Console.WriteLine("6: Jahres-Beleg (0x4154000000000006)");
 
+            Console.WriteLine("9: RKSV-DEP export");
             Console.WriteLine("10: Anzahl der zu sendenden Barumsatzbelege (max 999)");
 
             Console.WriteLine("exit: Program beenden");
@@ -190,6 +194,32 @@ namespace csConsoleApplicationSOAP
 
                 Response(resp);
             }
+            else if (inputInt == 9)
+            {
+
+                string filename = $"c:\\temp\\{cashBoxId}_{DateTime.UtcNow.Ticks}.json";
+
+                Console.Write("{0:G} RKSV-DEP export ({1})", DateTime.Now, filename);
+
+                string inputFilename = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(inputFilename))
+                {
+                    filename = inputFilename;
+                }
+
+                using (var file = System.IO.File.Open(filename, System.IO.FileMode.Create))
+                {
+                    using (var journal = proxy.Journal(0x4154000000000001, 0, 0 /*(new DateTime(2999,12,31)).Ticks*/))
+                    {
+                        journal.Position = 0;
+                        journal.CopyTo(file);
+                    }
+
+                    Console.WriteLine("{0:G} RKSV-DEP exportiert nach {1} ({2:0.00}Mb)", DateTime.Now, filename, ((decimal)file.Length) / 1024m / 1024m);
+                }
+
+
+            }
             else if (inputInt >= 10 && inputInt < 1000)
             {
 
@@ -280,11 +310,11 @@ namespace csConsoleApplicationSOAP
                 {
                     if (item.ftSignatureFormat == 0x03)
                     {
-                        fiskaltrust.ifPOS.Utilities.QR_TextChars(item.Data, 64, true);
+                        fiskaltrust.ifPOS.TwoDCode.QR_TextChars(item.Data, 64, true);
                     }
                     else if(item.ftSignatureFormat==0x08)
                     {
-                        fiskaltrust.ifPOS.Utilities.AZTEC_TextChars(item.Data, 80, true);
+                        fiskaltrust.ifPOS.TwoDCode.AZTEC_TextChars(item.Data, 80, true);
                     }
 
                     Console.WriteLine("{0}:{1}", item.Caption, item.Data);
